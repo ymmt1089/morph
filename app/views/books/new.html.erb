@@ -1,0 +1,89 @@
+books new
+テキスト投稿ページ
+
+<div id="book_new" class="row">
+  <%= form_for(@book) do |f| %>
+    <div id="create_title" class='input-field'>
+      <i class="icon-prepend fa fa-user" ></i>
+      <%= f.text_field :title , type: 'text' ,:html => {:id => "input_title" ,:type => "text"}%>
+       <label for="input_a">題名</label>
+    </div>
+
+    <div id="create_body" class="input-field">
+      <i class="icon-prepend fa fa-user"></i>
+      <%= f.text_field :body ,:html => {:id => "input_body",:class => "input-field",:type => "text"}%>
+      <label for="input_body">本文</label>
+    </div>
+
+  <div class="submit_button">
+    <%= f.submit '投稿する' , id:'submit', data: {disable_with: '解析中...'} ,:class=>"btn waves-effect"%>
+  </div>
+    <!-- 以下ローディング画面用js -->
+    <script>
+      $('#submit').on('click',function(){
+        document.getElementsByClassName('preloader-wrapper big active')[0].style.display ="block";
+        $('#loading').delay(600);
+      })
+      //document.getElementsByClassName('preloader-wrapper big active')[0].style.display ="block";
+    </script>
+    <!-- ここまでローディング画面用js -->
+  <% end %>
+</div>
+
+
+<!-- 以下ローディング画面用HTML -->
+<div id="loading">
+  <!-- <div class="preloader-wrapper big active" style="display:none;"> -->
+    <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+        <div class="spinner-layer spinner-red">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+        <div class="spinner-layer spinner-yellow">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>å
+          </div>
+        </div>
+        <div class="spinner-layer spinner-green">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<!-- ここまでローディング画面用HTML -->
+
+<!-- 以下ローディング画面用CSS -->
+<style type="text/css">
+	#loading{
+		position:absolute;
+		left:100%;
+		top:30%;
+		margin-left: -30%;
+		background-color: yellow;
+	}
+</style>
+<!-- ここまでローディング画面用CSS -->

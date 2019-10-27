@@ -1,0 +1,32 @@
+books edit
+作品編集画面
+	<p id="notice"><%= notice %></p>
+	<h1>Editing Book</h1>
+
+	<div class="form_block">
+		<%= form_for(@book,url:"/books/#{@book.id}") do |f| %>
+		<label>Title</label>
+		<div class="form_title">
+			<%= f.text_field :title %>
+		</div>
+		<label>Body</label>
+		<div class="form_body">
+			<%= f.text_area :body %>
+		</div>
+		<%= f.submit 'Update Book' %>
+		<% end %>
+	</div>
+	<a><%= link_to "Show", book_path(@book.id) %></a>
+	|
+	<a><%= link_to "Back" ,books_path %></a>
+
+	<%= link_to "表示" ,book_path(:id => @book.id), method: :post  %>
+	<%= link_to "非表示" ,book_path(@book.id), method: :delete  %>
+
+<%= current_user.id %>||||<%= @user.id %>
+
+	<% if current_user.id == @user.id %>
+	 <a><%= link_to "Destroy" ,book_path(@book.id), method: :delete  %></a>
+	<% end %>
+
+

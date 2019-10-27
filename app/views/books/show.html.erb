@@ -1,0 +1,55 @@
+作品詳細画面
+<%= link_to '解析結果', morpheme_path %>
+<%= link_to @user.user_name, user_path(@book.user.id) %>
+
+
+<!-- ここからwordcloud2のコード -->
+  <!-- <div id="cloud" style="position:relative;"></div> -->
+  <!-- <script src="js/wordcloud2.js"></script> -->
+<!-- ここまでwordcloud2のコード -->
+
+<p id="notice"><%= notice %></p>
+
+
+<div class="book_prof">
+  <p class="text_title"><%= @book.title %></p>
+  <h4><%= @user.user_name %></h4>
+</div>
+
+<div class="text_box">
+  <p class="text_body"> <%= @book.body %></p>
+</div>
+
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Back', books_path %>
+
+
+
+
+
+
+<%# @hindo.each do |k| %>
+	<%#= k.surface %>
+	<%#= k.count %>
+	<%# end %>
+
+<p><%= @hindo_a %></p>
+<!-- #surfaceに格納されている単語の中で同一の単語をまとめて、出現回数が多い順にソートする。 -->
+<%# words = surfaces.group_by(&:itself).map{|k, v| [k, v.size]}.sort_by{|k, v| -v} %>
+<!-- #出現回数が多い上位100単語を取得 -->
+<%# popular_words = words.first(100) %>
+
+<!-- #出現回数が多いトップ5の単語を取得 -->
+<%# @often_used_five_words = popular_words.first(5) %>
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

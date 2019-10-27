@@ -1,0 +1,72 @@
+#cloud{
+	width: 500px;
+	height: 500px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	display: inline-block;
+	background-color: white;
+	margin: 10px;
+}
+.dataset{
+	// width: 500px;
+	// height: 500px;
+}
+.morpheme_show{
+	// background-color: orange;
+	width: 90%;
+	margin: 0 auto;
+}
+	.morph_main{
+		// background-color: red;
+		position:relative;
+	}
+		.user_prof{
+			// background-color: yellow;
+			position: absolute;
+			top: 10px;
+			left: 520px;
+			width: 622px;
+			height: 500px;
+		}
+			.create_title{
+				// background-color: blue;
+				width: 100%;
+			}
+			.create_user{
+				// background-color: blue;
+				text-align: right;
+				width: 100%;
+			}
+			.create_time{
+				// background-color: blue;
+				text-align: right;
+				width: 100%;
+			}
+table{
+	width: 50%;
+	height: 260px;
+	margin: 0 auto;
+	padding: 10px;
+}
+.table_all{
+	// background-color: teal;
+	display: block;
+}
+	.table_meishi{
+		// background-color: red;
+		display: inline-block;
+		width: 30%;
+		margin: 0 auto;
+	}
+	.table_doushi{
+		// background-color: orange;
+		display: inline-block;
+		width: 30%;
+		margin: 0 auto;
+	}
+	.table_hinshi{
+		// background-color: yellow;
+		display: inline-block;
+		width: 30%;
+		margin: 0 auto;
+	}
