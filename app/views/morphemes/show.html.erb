@@ -13,6 +13,7 @@ morpheme show
   </div>
 
   <div class="table_all">
+    <% if @table_meishi.present? %>
     <div class="table_meishi">
       <table class="table">
         <tr>
@@ -27,7 +28,9 @@ morpheme show
         <% end %>
       </table>
     </div>
+    <% end %>
 
+    <% if @table_doushi.present? %>
     <div class="table_doushi">
       <table class="table">
         <tr>
@@ -42,7 +45,9 @@ morpheme show
         <% end %>
       </table>
     </div>
+    <% end %>
 
+    <% if @table_meishi.present? %>
     <div class="table_hinshi">
       <table class="table">
         <tr>
@@ -57,6 +62,7 @@ morpheme show
         <% end %>
       </table>
     </div>
+    <% end %>
   </div>
 </div>
 
@@ -72,7 +78,7 @@ morpheme show
 
   const random = d3.randomIrwinHall(100); //Irwin–Hall分布の乱数を発生させるためのコンストラクタ,()内の数値変えてもあまり変わらない
   const countMax = d3.max(words, function(w){ return w.size });//wordsというarreyのsizeの最大値をwに返す？
-  const sizeScale = d3.scaleLinear().domain([0, countMax]).range([5, 200])//d3.scaleLinearはdomainで指定した範囲を、rangeで指定した範囲に変換して出力する関数を設定する。0~countMaxまでの文字サイズを10〜w/2までのレンジに変換
+  const sizeScale = d3.scaleLinear().domain([0, countMax]).range([1, 200])//d3.scaleLinearはdomainで指定した範囲を、rangeで指定した範囲に変換して出力する関数を設定する。0~countMaxまでの文字サイズを10〜w/2までのレンジに変換
 
   //各wordsについて表示するときの大きさや傾きを設定
   d3.layout.cloud().size([w, h])//layoutは生データを中間形式に変換する関数、この場合はwordsのsizeのみ変更?

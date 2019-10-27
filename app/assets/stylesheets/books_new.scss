@@ -7,15 +7,24 @@
 		margin: 20px auto;
 	}
 
-
 #input-field_a{
+}
+.input_body{
+	height: 500px;
 }
 
 #submit{
-
+	position: relative;
 }
 
 .submit_button{
 	text-align: center;
 }
 
+#loading{
+	position:absolute;
+	font-size: 0px;
+	text-align: center;
+	left: 47%;
+	bottom: 10px;
+}

@@ -19,6 +19,7 @@ class BooksController < ApplicationController
 			words = changed_result.to_json.html_safe
 			@words_array << words
 			@words_hash[book.id] = words
+			binding.pry
 		end
 	end
 
@@ -108,8 +109,6 @@ class BooksController < ApplicationController
 	end
 
 	def restore
-		p '======';
-		p params[:id];
 		@book = Book.restore(params[:id])
 		redirect_to edit_book_path(params[:id])
 	end
