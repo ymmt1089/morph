@@ -1,7 +1,7 @@
 
 <p id="notice"><%= notice %></p>
 <div class="profile-main">
-	<div class="profile-left" style="background-image: url(<%= image_url('no_image.jpg') %>)"><%= attachment_image_tag @user,:user_image ,:fill, 200, 200, format: 'jpeg'%></div>
+	<div class="profile-left" style="background-image: url(<%= image_url('no_image.jpg') %>)"><%= attachment_image_tag @user,:user_image , :class=>"profile-image" %></div>
 	<div class="profile-center">
 		<h5><%= @user.user_name %></h5>
 		<a><%= @user.self_introduction %></a>
