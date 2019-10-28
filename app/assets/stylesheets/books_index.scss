@@ -1,7 +1,33 @@
-
+.page_title{
+	text-align: center;
+}
+.books_index{
+	width: 90%;//1152px;(10%=128px;)
+	margin: 0 auto;
+}
+.search_field{
+	width: 50%;
+	margin: 0 auto;
+	position: relative;
+	// background-color: red;
+}
+#search_form{
+	width: 200px;
+	// display: inline-block;
+	background-color: yellow;
+	// position: absolute;
+}
+#search_submit{
+	// width: 10%;
+	// display: inline-block;
+	// position: absolute;
+	// background-color: blue;
+	// text-align: right;
+	margin-right: 0;
+	// background-color: red;
+}
 .all_word_clouds{
 	// background-color: yellow;
-	width: 90%;//1152px;(10%=128px;)
 	margin: 0 auto;
 	padding: 18px;
 }

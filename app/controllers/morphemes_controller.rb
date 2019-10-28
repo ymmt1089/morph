@@ -5,7 +5,7 @@ class MorphemesController < ApplicationController
 
 		@words_array = []
 
-		one_book_morpheme_origins = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or pos like ?) and book_id = ?","%名詞-一般%","%名詞-固有名詞%","%名詞-副詞可能%","%名詞-接尾-人名%","%名詞-接尾-地域","%動詞-自立%", @book.id)
+		one_book_morpheme_origins = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or inflection like ? ) and book_id = ? ","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域","動詞-自立" , @book.id)
 		one_book_morpheme_origins_count = one_book_morpheme_origins.group(:origin).count
 		one_book_morpheme_origins_count_sorted_hash = Hash[one_book_morpheme_origins_count.sort_by{ |_, v| -v } ] #hash化及び、valueの昇順(DESC)でソートする
 		# binding.pry
@@ -18,7 +18,7 @@ class MorphemesController < ApplicationController
 		# 以下グラフ用
 		# 名詞のみの頻出度
 		@meishis_array = []
-		one_book_morpheme_meishi = Morpheme.where("(pos like ?) and book_id = ?","%名詞%", @book.id)
+		one_book_morpheme_meishi = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ?) and book_id = ?","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域", @book.id)
 		one_book_morpheme_meishi_count = one_book_morpheme_meishi.group(:origin).count
 		one_book_morpheme_meishi_count_sorted_hash = Hash[one_book_morpheme_meishi_count.sort_by{ |_, v| -v } ]
 		result_meishi = one_book_morpheme_meishi_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value < 1)}
@@ -34,7 +34,7 @@ class MorphemesController < ApplicationController
 
 		# 動詞のみの頻出度
 		@doushis_array = []
-		one_book_morpheme_doushi = Morpheme.where("(pos like ?) and book_id = ?","%動詞%", @book.id)
+		one_book_morpheme_doushi = Morpheme.where("(pos like ?) and book_id = ?","動詞-自立", @book.id)
 		one_book_morpheme_doushi_count = one_book_morpheme_doushi.group(:origin).count
 		one_book_morpheme_doushi_count_sorted_hash = Hash[one_book_morpheme_doushi_count.sort_by{ |_, v| -v } ]
 		result_doushi = one_book_morpheme_doushi_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value < 1)}
@@ -71,7 +71,7 @@ class MorphemesController < ApplicationController
 		@books = @user.books.with_deleted
 		@words_array = []
 
-		one_book_morpheme_origins = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or pos like ?) and book_id = ?","%名詞-一般%","%名詞-固有名詞%","%名詞-副詞可能%","%名詞-接尾-人名%","%名詞-接尾-地域","%動詞-自立%",@user )
+		one_book_morpheme_origins = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or pos like ?) and book_id = ?","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域","動詞-自立", @user)
 		one_book_morpheme_origins_count = one_book_morpheme_origins.group(:origin).count
 		one_book_morpheme_origins_count_sorted_hash = Hash[one_book_morpheme_origins_count.sort_by{ |_, v| -v } ] #hash化及び、valueの昇順(DESC)でソートする
 		# binding.pry
@@ -84,7 +84,7 @@ class MorphemesController < ApplicationController
 		# 以下グラフ用
 		# 名詞のみの頻出度
 		@meishis_array = []
-		one_book_morpheme_meishi = Morpheme.where("(pos like ?) and book_id = ?","%名詞%", @books.id)
+		one_book_morpheme_meishi = Morpheme.whereMorpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or pos like ?) and book_id = ?","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域", @books.id)
 		one_book_morpheme_meishi_count = one_book_morpheme_meishi.group(:origin).count
 		one_book_morpheme_meishi_count_sorted_hash = Hash[one_book_morpheme_meishi_count.sort_by{ |_, v| -v } ]
 		result_meishi = one_book_morpheme_meishi_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value < 1)}
@@ -98,7 +98,7 @@ class MorphemesController < ApplicationController
 
 		# 動詞のみの頻出度
 		@doushis_array = []
-		one_book_morpheme_doushi = Morpheme.where("(pos like ?) and book_id = ?","%動詞%", @books.id)
+		one_book_morpheme_doushi = Morpheme.where("(pos like ?) and book_id = ?","動詞-自立", @books.id)
 		one_book_morpheme_doushi_count = one_book_morpheme_doushi.group(:origin).count
 		one_book_morpheme_doushi_count_sorted_hash = Hash[one_book_morpheme_doushi_count.sort_by{ |_, v| -v } ]
 		result_doushi = one_book_morpheme_doushi_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value < 1)}

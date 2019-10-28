@@ -1,13 +1,9 @@
-morpheme show
-解析結果　ビジュアル画面
-<%= link_to 'ユーザーページ', user_path(@book.user.id) %>
-
 <div class="morpheme_show">
   <div class="morph_main">
     <div id="cloud" data-words=<%= @words_array %>></div>
     <div class="user_prof">
-      <span class="create_title"><h1><%= @book.title %></h1></span>
-      <span class="create_user"><h5>投稿者:<%= @book.user.user_name %></h5></span>
+      <span class="create_title"><h1> <%= link_to @book.title , book_path(@book.id) %> </h1></span>
+      <span class="create_user"><h5>著者:<%= link_to @book.user.user_name, user_path(@book.user.id) %></h5></span>
       <span class="create_time"><h6><%= @book.user.created_at.strftime('%Y年%m月%d日 %H時%M分') %></h6></span>
     </div>
   </div>
@@ -78,7 +74,7 @@ morpheme show
 
   const random = d3.randomIrwinHall(100); //Irwin–Hall分布の乱数を発生させるためのコンストラクタ,()内の数値変えてもあまり変わらない
   const countMax = d3.max(words, function(w){ return w.size });//wordsというarreyのsizeの最大値をwに返す？
-  const sizeScale = d3.scaleLinear().domain([0, countMax]).range([1, 200])//d3.scaleLinearはdomainで指定した範囲を、rangeで指定した範囲に変換して出力する関数を設定する。0~countMaxまでの文字サイズを10〜w/2までのレンジに変換
+  const sizeScale = d3.scaleLinear().domain([0, countMax]).range([10, 100])//d3.scaleLinearはdomainで指定した範囲を、rangeで指定した範囲に変換して出力する関数を設定する。0~countMaxまでの文字サイズを10〜w/2までのレンジに変換
 
   //各wordsについて表示するときの大きさや傾きを設定
   d3.layout.cloud().size([w, h])//layoutは生データを中間形式に変換する関数、この場合はwordsのsizeのみ変更?
@@ -103,7 +99,7 @@ morpheme show
       .data(words)//??
       .enter().append("text")//enterはメソッドらしい・・・？
       .style("font-size", function(d) { return d.size + "px"; })//styleは要素のスタイル値を変更したりするやつ.関数dをd.sizeのピクセルに変更？
-      .style("font-family", "Impact")//font-familyをimpactに変更
+      .style("font-family", "serif")//font-familyをimpactに変更
       .style("fill", function(d, i) { return d3.schemeCategory10[i % 10]; })//d3.schemeCategory10というカラーテーマに従って
       .attr("text-anchor", "middle")//
       .attr("transform", function(d) {

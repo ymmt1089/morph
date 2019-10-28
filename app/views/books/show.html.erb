@@ -1,55 +1,18 @@
-作品詳細画面
-<%= link_to '解析結果', morpheme_path %>
-<%= link_to @user.user_name, user_path(@book.user.id) %>
-
-
-<!-- ここからwordcloud2のコード -->
-  <!-- <div id="cloud" style="position:relative;"></div> -->
-  <!-- <script src="js/wordcloud2.js"></script> -->
-<!-- ここまでwordcloud2のコード -->
-
 <p id="notice"><%= notice %></p>
+<div class="book_show">
+	<%= link_to '作品一覧', books_path  ,id:'submit' ,:class=>"btn waves-effect" %>
+	<%= link_to '解析結果', morpheme_path ,id:'submit' ,:class=>"btn waves-effect" %>
+	<%= link_to '著者の詳細', user_path(@book.user.id),id:'submit' ,:class=>"btn waves-effect" %>
+	<% if current_user.id == @user.id %>
+		| <%= link_to '作品編集', edit_book_path(@book)  ,id:'submit' ,:class=>"btn waves-effect"%>
+	<% end %>
 
+	<div class="book_prof">
+		<span class="text_title"><%= @book.title %></span>
+		<h4 class="text_user"><%= link_to @user.user_name, user_path(@book.user.id) %></h4>
+	</div>
 
-<div class="book_prof">
-  <p class="text_title"><%= @book.title %></p>
-  <h4><%= @user.user_name %></h4>
+	<div class="text_box">
+		<p class="text_body"><%= @book.body %></p>
+	</div>
 </div>
-
-<div class="text_box">
-  <p class="text_body"> <%= @book.body %></p>
-</div>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
-
-
-
-
-
-
-<%# @hindo.each do |k| %>
-	<%#= k.surface %>
-	<%#= k.count %>
-	<%# end %>
-
-<p><%= @hindo_a %></p>
-<!-- #surfaceに格納されている単語の中で同一の単語をまとめて、出現回数が多い順にソートする。 -->
-<%# words = surfaces.group_by(&:itself).map{|k, v| [k, v.size]}.sort_by{|k, v| -v} %>
-<!-- #出現回数が多い上位100単語を取得 -->
-<%# popular_words = words.first(100) %>
-
-<!-- #出現回数が多いトップ5の単語を取得 -->
-<%# @often_used_five_words = popular_words.first(5) %>
-
-
-
-
-
-
-
-
-</body>
-
-
-</html>

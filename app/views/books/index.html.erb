@@ -1,67 +1,65 @@
-books index
-作品一覧ページ
 <p id="notice"><%= notice %></p>
-
-<div class="search">
-	<%= form_tag('/',method: :get ) do %>
-  		<%= text_field_tag :keyword, "検索ワードを入力してください" %>
-  		<%= submit_tag "検索" %>
-	<% end %>
-</div>
-
-
-<h1>作品一覧</h1>
-
-<div class="all_word_clouds">
-	<% @words_hash.each do |book_id, words_array| %>
-		<%= link_to book_path(book_id) do %>
-			<div id="cloud<%= book_id %>" class="cloud_style  hoverable" data-words=<%= words_array %> ></div>
+<div class="books_index">
+		<h1 class="page_title">作品一覧</h1>
+	<div class="search_field">
+		<%= form_tag('/',method: :get ) do %>
+		<i id="search_submit" class="icon-prepend fa fa-user"></i>
+		<%= submit_tag "検索" , data: {disable_with: '検索中...'} ,:class=>"btn waves-effect",id:'search_submit'%>
+	  	<%= text_field_tag :html => {:class => "input-field",:type => "text"}, id: "search_form" %>
 		<% end %>
+	</div>
 
-		<script defer>
-			var TARGET_ELEMENT_ID = '#cloud<%= book_id %>' //IDだから#をつける
-			var cloud = document.querySelector(TARGET_ELEMENT_ID)
-			var words = JSON.parse(cloud.getAttribute('data-words'))
+	<div class="all_word_clouds">
+		<% @words_hash.each do |book_id, words_array| %>
+			<%= link_to book_path(book_id) do %>
+				<div id="cloud<%= book_id %>" class="cloud_style  hoverable" data-words=<%= words_array %> ></div>
+			<% end %>
 
-			//width, height
-			var w = 800, //表示画面の横幅
-			    h = 800 //表示画面の縦幅
+			<script defer>
+				var TARGET_ELEMENT_ID = '#cloud<%= book_id %>' //IDだから#をつける
+				var cloud = document.querySelector(TARGET_ELEMENT_ID)
+				var words = JSON.parse(cloud.getAttribute('data-words'))
 
-			var random = d3.randomIrwinHall(100); //Irwin–Hall分布の乱数を発生させるためのコンストラクタ,()内の数値変えてもあまり変わらない
-			var countMax = d3.max(words, function(w){ return w.size });//wordsというarreyのsizeの最大値をwに返す？
-			var sizeScale = d3.scaleLinear().domain([0, countMax]).range([10, w])//d3.scaleLinearはdomainで指定した範囲を、rangeで指定した範囲に変換して出力する関数を設定する
+				//width, height
+				var w = 800, //表示画面の横幅
+				    h = 800 //表示画面の縦幅
 
-			//各wordsについて表示するときの大きさや傾きを設定
-			d3.layout.cloud().size([w, h])//layoutは生データを中間形式に変換する関数、この場合はwordsのsizeのみ変更?
-			  .words(words)//??
-			  .rotate(function() { return (~~(Math.random() * 6) - 3) * 30; }) // ~~は小数点以下切り捨て.rotateは回転.Math??
-			  .font("Impact")//
-			  .fontSize(function(d) { return sizeScale(d.size);})//fontsizeの関数dに	sizeの値を入れている？
-			  .on("end", draw) //下記のdraw描画関数の読み込み
-			  .start();//実行？
+				var random = d3.randomIrwinHall(100); //Irwin–Hall分布の乱数を発生させるためのコンストラクタ,()内の数値変えてもあまり変わらない
+				var countMax = d3.max(words, function(w){ return w.size });//wordsというarreyのsizeの最大値をwに返す？
+				var sizeScale = d3.scaleLinear().domain([0, countMax]).range([10, w])//d3.scaleLinearはdomainで指定した範囲を、rangeで指定した範囲に変換して出力する関数を設定する
 
-			function draw(words) {
-			  console.log(words)//wordsの値をコンソール上に実行できる便利
-			  d3.select(TARGET_ELEMENT_ID)//selectでtag(今回はTARGET_ELEMENT_ID)を選択している
-			    .append("svg")//appendとは?svgのcssはどこに？
-			      .attr("class", "ui fluid image") // style using semantic ui
-			      .attr("viewBox", "0 0 " + w + " " + h )  // ViewBox : x, y, width, height. viewboxの横幅縦幅を文字サイズに合わせてる？
-			      .attr("width", "100%")    // 表示サイズの設定
-			      .attr("height", "100%")   // 表示サイズの設定
-			    .append("g")
-			      .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")")//attrはHTMLの属性の取得や設定ができる
-			    .selectAll("text")//全てのtag(text)を選択している
-			      .data(words)//??
-			    .enter().append("text")//enterはメソッドらしい・・・？
-			      .style("font-size", function(d) { return d.size + "px"; })//styleは要素のスタイル値を変更したりするやつ.関数dをd.sizeのピクセルに変更？
-			      .style("font-family", "Impact")//font-familyをimpactに変更
-			      .style("fill", function(d, i) { return d3.schemeCategory10[i % 10]; })//d3.schemeCategory10というカラーテーマに従って
-			      .attr("text-anchor", "middle")//
-			      .attr("transform", function(d) {
-			        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-			      })//
-			      .text(function(d) { return d.text; });
-			}
-		</script>
-	<% end %>
+				//各wordsについて表示するときの大きさや傾きを設定
+				d3.layout.cloud().size([w, h])//layoutは生データを中間形式に変換する関数、この場合はwordsのsizeのみ変更?
+				  .words(words)//??
+				  .rotate(function() { return (~~(Math.random() * 6) - 3) * 30; }) // ~~は小数点以下切り捨て.rotateは回転.Math??
+				  .font("Impact")//
+				  .fontSize(function(d) { return sizeScale(d.size);})//fontsizeの関数dに	sizeの値を入れている？
+				  .on("end", draw) //下記のdraw描画関数の読み込み
+				  .start();//実行？
+
+				function draw(words) {
+				  console.log(words)//wordsの値をコンソール上に実行できる便利
+				  d3.select(TARGET_ELEMENT_ID)//selectでtag(今回はTARGET_ELEMENT_ID)を選択している
+				    .append("svg")//appendとは?svgのcssはどこに？
+				      .attr("class", "ui fluid image") // style using semantic ui
+				      .attr("viewBox", "0 0 " + w + " " + h )  // ViewBox : x, y, width, height. viewboxの横幅縦幅を文字サイズに合わせてる？
+				      .attr("width", "100%")    // 表示サイズの設定
+				      .attr("height", "100%")   // 表示サイズの設定
+				    .append("g")
+				      .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")")//attrはHTMLの属性の取得や設定ができる
+				    .selectAll("text")//全てのtag(text)を選択している
+				      .data(words)//??
+				    .enter().append("text")//enterはメソッドらしい・・・？
+				      .style("font-size", function(d) { return d.size + "px"; })//styleは要素のスタイル値を変更したりするやつ.関数dをd.sizeのピクセルに変更？
+				      .style("font-family", "serif")//font-familyをimpactに変更
+				      .style("fill", function(d, i) { return d3.schemeCategory10[i % 10]; })//d3.schemeCategory10というカラーテーマに従って
+				      .attr("text-anchor", "middle")//
+				      .attr("transform", function(d) {
+				        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+				      })//
+				      .text(function(d) { return d.text; });
+				}
+			</script>
+		<% end %>
+	</div>
 </div>

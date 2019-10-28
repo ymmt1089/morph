@@ -1,7 +1,19 @@
+.book_show{
+	width: 90%;
+	margin: 0 auto;
+}
+
 .text_title{
 	font-family: serif;
 	font-size: 50px;
 	white-space: pre-wrap;
+	ward-warp: break-word;
+	margin: 0 20px;
+}
+.text_box{
+}
+.text_user{
+	text-align: right;
 }
 .text_body{
 	font-family: serif;
@@ -9,7 +21,9 @@
 	white-space: pre-wrap;
 }
 .book_prof{
-	background-color: orange;
+	// background-color: orange;
+	width: 100%;
+
 }
 .text_box{
 	background-color: #f0f8ff

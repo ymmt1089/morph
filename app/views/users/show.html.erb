@@ -1,17 +1,15 @@
 
 <p id="notice"><%= notice %></p>
-
-  <%#= image_tag attachment_url(@user, :user_image, :fill, 300, 300, format: "jpg") %>
 <div class="profile-main">
 	<div class="profile-left">
-		<%= attachment_image_tag @user,:user_image, :fill, 200, 200, format: 'jpeg', fallback: "/images/no_image.jpg" %>
+		<%= attachment_image_tag @user,:user_image, :fill, 200, 200, format: 'jpeg', fallback: "/assets/images/no_image.jpg" %>
 	</div>
 	<div class="profile-center">
 		<h5><%= @user.user_name %></h5>
 		<a><%= @user.self_introduction %></a>
 	</div>
 	<div class="profile-right">
-		<a>文章解析ページへ</a>
+		<%= link_to 'ユーザー情報編集', edit_user_path(@user),id:'submit' ,:class=>"btn waves-effect" %>
 	</div>
 </div>
 
@@ -63,7 +61,7 @@
 			      .data(words)//??
 			    .enter().append("text")//enterはメソッドらしい・・・？
 			      .style("font-size", function(d) { return d.size + "px"; })//styleは要素のスタイル値を変更したりするやつ.関数dをd.sizeのピクセルに変更？
-			      .style("font-family", "Impact")//font-familyをimpactに変更
+			      .style("font-family", "serif")//font-familyをimpactに変更
 			      .style("fill", function(d, i) { return d3.schemeCategory10[i % 10]; })//d3.schemeCategory10というカラーテーマに従って
 			      .attr("text-anchor", "middle")//
 			      .attr("transform", function(d) {
