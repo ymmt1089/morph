@@ -34,7 +34,7 @@ class MorphemesController < ApplicationController
 
 		# 動詞のみの頻出度
 		@doushis_array = []
-		one_book_morpheme_doushi = Morpheme.where("(pos like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ?) and book_id = ?","動詞-自立","する","ある","なる","いう",,"いる" @book.id)
+		one_book_morpheme_doushi = Morpheme.where("(pos like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ?) and book_id = ?","動詞-自立","する","ある","なる","いう","いる" ,@book.id)
 		one_book_morpheme_doushi_count = one_book_morpheme_doushi.group(:origin).count
 		one_book_morpheme_doushi_count_sorted_hash = Hash[one_book_morpheme_doushi_count.sort_by{ |_, v| -v } ]
 		result_doushi = one_book_morpheme_doushi_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value < 1)}
