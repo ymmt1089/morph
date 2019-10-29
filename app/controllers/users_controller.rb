@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+	PER=3
+
 	def index
 		@books = Book.all
 		@users = User.all
@@ -28,6 +30,7 @@ class UsersController < ApplicationController
 			@words_array << words
 			@words_hash[book.id] = words
 		end
+		@words_hash = Kaminari.paginate_array(@words_hash.keys).page(params[:page]).per(PER)
 	end
 
 	def edit

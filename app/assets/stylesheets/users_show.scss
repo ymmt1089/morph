@@ -53,8 +53,8 @@
 .word_cloud{
 	// background-color: white;
 	width: 90%;
-	height: 1000px;
-	margin: 0 auto;
+	// height: 1000px;
+	margin: 0 auto 50px auto;
 }
 	.cloud_style_show{
 		// background-color: white;
@@ -96,3 +96,6 @@
 		white-space: normal;
 		word-break: break-all;
 	}
+.paginate_users{
+	margin: 30px;
+}

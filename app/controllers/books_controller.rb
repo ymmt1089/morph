@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
 
-PER=5
+	PER=15
+
 	def index
 
 		#@books = Book.all
