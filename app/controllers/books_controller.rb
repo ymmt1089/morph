@@ -1,12 +1,14 @@
 class BooksController < ApplicationController
 
+PER=5
 	def index
+
 		#@books = Book.all
 		if params[:keyword]
 			keyword = params[:keyword]
-			@books = Book.joins(:morphemes).where("morphemes.origin like ? ","%#{keyword}%")
+			@books = Book.joins(:morphemes).where("morphemes.origin like ? ","%#{keyword}%").page(params[:page]).per(PER)
 		else
-			@books = Book.all
+			@books = Book.all.page(params[:page]).per(PER)
 		end
 		@words_array = []
 		@words_hash = {}
@@ -98,7 +100,6 @@ class BooksController < ApplicationController
 	end
 
 	def destroy
-		# binding.pry
 		book = Book.with_deleted.find(params[:id])
 		if  book.destroy
 			redirect_to books_path
