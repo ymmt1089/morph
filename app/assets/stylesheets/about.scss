@@ -1,0 +1,118 @@
+.morph{
+	font-family: Hiragino Mincho ProN;
+}
+.morph_about_main{
+	background-color: #f8ced9;
+	position: relative;
+	width: auto;
+	height: 800px;
+	overflow: hidden;
+}
+	.circle_1{
+		width: 300px;
+		height: 300px;
+		border-radius: 50%;
+		background-color:#d0bad9;
+		position: absolute;
+		top: 170px;
+		left: -30px;
+	}
+	.circle_2{
+		width: 1000px;
+		height: 1000px;
+		border-radius: 50%;
+		background-color:#e85295;
+		position: absolute;
+		top: 400px;
+		right: -300px;
+	}
+	.circle_3{
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+		background-color:white;
+		position: absolute;
+		top: 40px;
+		left: 300px;
+	}
+	.circle_4{
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+		background-color:white;
+		position: absolute;
+		top: 140px;
+		left: 500px;
+	}
+	.circle_5{
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+		background-color:white;
+		position: absolute;
+		top: 190px;
+		left: 700px;
+	}
+	.circle_6{
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+		background-color:white;
+		position: absolute;
+		top: 250px;
+		left: 900px;
+	}
+	.M{
+		position: absolute;
+		left: 1000px;
+		top: 0;
+	}
+	.O{
+		position: absolute;
+		left: 1000px;
+		top: 70px;
+	}
+	.R{
+		position: absolute;
+		left: 1000px;
+		top: 140px;
+	}
+	.P{
+		position: absolute;
+		left: 1000px;
+		top: 210px;
+	}
+	.H{
+		position: absolute;
+		left: 1000px;
+		top: 280px;
+	}
+	.MO{
+		position: absolute;
+		left: 300px;
+		top: 0px;
+	}
+	.U{
+		position: absolute;
+		left: 500px;
+		top: 100px;
+	}
+	.FU{
+		position: absolute;
+		left: 700px;
+		top: 150px;
+	}
+	.period{
+		position: absolute;
+		left: 900px;
+		top: 200px;
+	}
+.morph_about_main_2{
+	// background-color: #f8ced9;
+	margin: 0 auto;
+	width: 90%;
+	height: 800px;
+}
+	.about_profile{
+		text-align: center;
+	}

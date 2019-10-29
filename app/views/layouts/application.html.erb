@@ -27,7 +27,7 @@
                     <a><%= link_to 'MORPH', about_path ,class: "brand-logo"%></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <% if user_signed_in? %>
-                        <li><a><%= link_to 'about', about_path %></a></li>
+                        <li><a><%= link_to 'MORPHとは', about_path %></a></li>
                         <li><a><%= link_to 'マイページ', user_path(current_user.id) %></a></li>
                         <li><a><%= link_to '作品一覧', books_path %></a></li>
                         <li><a><%= link_to '作品投稿', new_book_path %></a></li>

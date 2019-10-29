@@ -8,12 +8,10 @@ class MorphemesController < ApplicationController
 		one_book_morpheme_origins = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or pos like ? ) and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and book_id = ? ","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域","動詞-自立","する","ある","なる","いう","いる", @book.id)
 		one_book_morpheme_origins_count = one_book_morpheme_origins.group(:origin).count
 		one_book_morpheme_origins_count_sorted_hash = Hash[one_book_morpheme_origins_count.sort_by{ |_, v| -v } ] #hash化及び、valueの昇順(DESC)でソートする
-		# binding.pry
 		result = one_book_morpheme_origins_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value <= Math.sqrt(one_book_morpheme_origins_count_sorted_hash.first[1]))} #＠hindoのkeyがnilまたはvalueが60未満は除外
 		changed_result = result.map{|v| {text:v[0],size:v[1]}}
 		words = changed_result.to_json.html_safe
 		@words_array = words
-		# binding.pry
 
 		# 以下グラフ用
 		# 名詞のみの頻出度
@@ -60,7 +58,6 @@ class MorphemesController < ApplicationController
 		changed_result_hinshi = result_hinshi.map{|v| {hinshi:v[0],count:(v[1])*(hinshi_par)}}
 		hinshis = changed_result_hinshi.to_json.html_safe
 		@hinshis_array = hinshis
-		# binding.pry
 
 		table_hinshi = Hash[*result_hinshi.to_a.shift(20).flatten!]
 		@table_hinshi = table_hinshi.map{|v| {hinshi:v[0],count:v[1]}}
@@ -74,12 +71,10 @@ class MorphemesController < ApplicationController
 		one_book_morpheme_origins = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or pos like ?) and book_id = ?","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域","動詞-自立", @user)
 		one_book_morpheme_origins_count = one_book_morpheme_origins.group(:origin).count
 		one_book_morpheme_origins_count_sorted_hash = Hash[one_book_morpheme_origins_count.sort_by{ |_, v| -v } ] #hash化及び、valueの昇順(DESC)でソートする
-		# binding.pry
 		result = one_book_morpheme_origins_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value <= Math.sqrt(one_book_morpheme_origins_count_sorted_hash.first[1]))} #＠hindoのkeyがnilまたはvalueが60未満は除外
 		changed_result = result.map{|v| {text:v[0],size:v[1]}}
 		words = changed_result.to_json.html_safe
 		@words_array = words
-		# binding.pry
 
 		# 以下グラフ用
 		# 名詞のみの頻出度
@@ -120,7 +115,6 @@ class MorphemesController < ApplicationController
 		changed_result_hinshi = result_hinshi.map{|v| {hinshi:v[0],count:(v[1])*(hinshi_par)}}
 		hinshis = changed_result_hinshi.to_json.html_safe
 		@hinshis_array = hinshis
-		# binding.pry
 
 		table_hinshi = Hash[*result_hinshi.to_a.shift(20).flatten!]
 		@table_hinshi = table_hinshi.map{|v| {hinshi:v[0],count:v[1]}}
