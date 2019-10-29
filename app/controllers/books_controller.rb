@@ -41,7 +41,7 @@ class BooksController < ApplicationController
 		@book = Book.new(book_params)
 		@book.user_id = current_user.id
       if @book.save
-      	flash[:notice] = "成功"
+      	flash[:notice] = "形態素解析が完了しました。"
 
       	# @book = Book.find(params[:id])
 		require 'mecab'
@@ -91,7 +91,7 @@ class BooksController < ApplicationController
 		book = Book.find(params[:id])
 		if book.update(book_params)
 			redirect_to book_path(book.id)
-			flash[:notice] = "Book was successfully updated."
+			flash[:notice] = "編集を完了しました。"
 		else
 			redirect_to book_path(book.id)
 		end

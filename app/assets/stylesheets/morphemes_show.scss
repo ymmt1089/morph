@@ -6,6 +6,7 @@
 	display: inline-block;
 	background-color: white;
 	margin: 10px;
+	font-family: Hiragino Mincho ProN;
 }
 .dataset{
 	// width: 500px;
@@ -49,10 +50,13 @@ table{
 	height: 260px;
 	margin: 0 auto;
 	padding: 10px;
+	text-align: center;
 }
 .table_all{
 	// background-color: teal;
 	display: block;
+	text-align: center;
+	margin-top: 20px;
 }
 	.table_meishi{
 		// background-color: red;
@@ -60,17 +64,32 @@ table{
 		width: 30%;
 		margin: 0 auto;
 	}
+		#meishi_graph{
+			// background-color: white;
+			margin: 5px 5px;
+			text-align: center;
+		}
 	.table_doushi{
 		// background-color: orange;
 		display: inline-block;
 		width: 30%;
 		margin: 0 auto;
 	}
+		#doushi_graph{
+			// background-color: white;
+			margin: 5px 5px;
+			text-align: center;
+		}
 	.table_hinshi{
 		// background-color: yellow;
 		display: inline-block;
 		width: 30%;
 		margin: 0 auto;
 	}
+		#hinshi_graph{
+			// background-color: white;
+			margin: 5px 5px;
+			text-align: center;
+		}
 
 

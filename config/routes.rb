@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
 	post 'books/:id' => 'books#restore'
 
-	root :to => 'books#index'
+	root :to => 'arts#about'
 
 	# get 'analysis' => 'books#analysis'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

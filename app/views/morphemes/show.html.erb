@@ -1,6 +1,4 @@
 
-
-
 <div class="morpheme_show">
   <div class="morph_main">
     <div id="cloud" data-words=<%= @words_array %>></div>
@@ -14,7 +12,6 @@
   <div class="table_all">
     <% if @table_meishi.present? %>
     <div class="table_meishi">
-      <div id="meishi_graph" data-words=<%= @meishis_array %>></div>
       <div id="meishi_graph" data-words=<%= @meishis_array %>></div>
       <table class="table">
         <tr>
@@ -124,7 +121,7 @@
 <script>
   // 1. データの準備
 
-  var dataset = <%= @meishis_array %>;
+  var dataset = <%= @table_maishi_graph %>;
   console.log(dataset)//wordsの値をコンソール上に実行できる便利
   var width = 200; // グラフの幅
   var height = 200; // グラフの高さ
@@ -170,7 +167,7 @@
 <!-- 以下動詞円グラフ -->
 <script>
   // 1. データの準備
-  var dataset = <%= @doushis_array %>;
+  var dataset = <%= @table_doushi_graph %>;
   console.log(dataset)//wordsの値をコンソール上に実行できる便利
   var width = 200; // グラフの幅
   var height = 200; // グラフの高さ
@@ -216,7 +213,7 @@
 <!-- 以下品詞円グラフ -->
 <script>
   // 1. データの準備
-  var dataset = <%= @hinshis_array %>;
+  var dataset = <%= @table_hinshi_graph%>;
   console.log(dataset)//wordsの値をコンソール上に実行できる便利
   var width = 200; // グラフの幅
   var height = 200; // グラフの高さ

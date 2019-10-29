@@ -19,7 +19,7 @@ class MorphemesController < ApplicationController
 		one_book_morpheme_meishi = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ?) and book_id = ?","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域", @book.id)
 		one_book_morpheme_meishi_count = one_book_morpheme_meishi.group(:origin).count
 		one_book_morpheme_meishi_count_sorted_hash = Hash[one_book_morpheme_meishi_count.sort_by{ |_, v| -v } ]
-		result_meishi = one_book_morpheme_meishi_count_sorted_hash.reject{|key,value|(/nil/ =~ key) ||(value <= Math.sqrt(one_book_morpheme_origins_count_sorted_hash.first[1]))}
+		result_meishi = one_book_morpheme_meishi_count_sorted_hash.reject{|key,value|(/nil/ =~ key) ||(value <= Math.sqrt(one_book_morpheme_meishi_count_sorted_hash.first[1]))}
 		unless result_meishi.values.map(&:to_f).sum == 0
 			meishi_par = (100) / (result_meishi.values.map(&:to_f).sum)
 		end
@@ -29,6 +29,10 @@ class MorphemesController < ApplicationController
 
 		table_meishi = Hash[*result_meishi.to_a.shift(20).flatten!]
 		@table_meishi = table_meishi.map{|v| {meishi:v[0],count:v[1]}}
+		table_meishi = Hash[*result_meishi.to_a.shift(10).flatten!]
+		table_meishi = table_meishi.map{|v| {meishi:v[0],count:v[1]}}
+		table_meishi_changed_json = table_meishi.to_json.html_safe
+		@table_maishi_graph = table_meishi_changed_json
 
 		# 動詞のみの頻出度
 		@doushis_array = []
@@ -45,6 +49,10 @@ class MorphemesController < ApplicationController
 
 		table_doushi = Hash[*result_doushi.to_a.shift(20).flatten!]
 		@table_doushi = table_doushi.map{|v| {doushi:v[0],count:v[1]}}
+		table_doushi = Hash[*result_doushi.to_a.shift(10).flatten!]
+		table_doushi = table_doushi.map{|v| {doushi:v[0],count:v[1]}}
+		table_doushi_changed_json = table_doushi.to_json.html_safe
+		@table_doushi_graph = table_doushi_changed_json
 
 		# 品詞のみの頻出度
 		@hinshis_array = []
@@ -61,6 +69,10 @@ class MorphemesController < ApplicationController
 
 		table_hinshi = Hash[*result_hinshi.to_a.shift(20).flatten!]
 		@table_hinshi = table_hinshi.map{|v| {hinshi:v[0],count:v[1]}}
+		table_hinshi = Hash[*result_hinshi.to_a.shift(10).flatten!]
+		table_hinshi = table_hinshi.map{|v| {hinshi:v[0],count:v[1]}}
+		table_hinshi_changed_json = table_hinshi.to_json.html_safe
+		@table_hinshi_graph = table_hinshi_changed_json
 	end
 
 	def index
