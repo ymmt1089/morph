@@ -19,14 +19,23 @@
 body{
 }
 
-nav {
-  @extend .teal;
-}
+// nav {
+//   @extend .teal;
+// }
 
-footer {
-  @extend .teal;
-}
+// footer {
+//   @extend .teal;
+// }
 
 .brand-logo{
+	font-family: Hiragino Mincho ProN;
+}
+.header{
+	background-color:  #67b6a0;
+}
+.footer{
+	background-color:  #67b6a0;
+}
+#footer_font{
 	font-family: Hiragino Mincho ProN;
 }

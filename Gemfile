@@ -84,7 +84,7 @@ gem 'material_icons'
 gem 'paranoia'
 
 gem 'json'
-
+gem 'kaminari','~> 1.1.1'
 
 group :production do
   gem 'mysql2'

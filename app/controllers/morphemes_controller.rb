@@ -1,7 +1,7 @@
 class MorphemesController < ApplicationController
 
 	def show
-		@book = Book.find(params[:id])
+		@book = Book.with_deleted.find(params[:id])
 
 		@words_array = []
 
