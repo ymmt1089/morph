@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_many :morphemes
   has_many :arts
   acts_as_paranoid
+
+  validates :completed, inclusion: { in: [true, false] }
+  validates :user_name, uniqueness: true
+  validates :email, uniqueness: true
 end

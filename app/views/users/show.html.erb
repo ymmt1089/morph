@@ -14,7 +14,7 @@
 </div>
 
 <div class="word_cloud">
-	<% @words_array2.each do |row| %>
+	<% @words_array.each do |row| %>
 		<div id= "one_book" class="card hoverable">
 			<%= link_to "", book_path(row[:book_id]) %>
 				<div id="cloud<%= row[:book_id] %>" class="cloud_style_show hoverable" data-words=<%= row[:words_array] %> ></div>
@@ -69,5 +69,5 @@
 			}
 		</script>
 	<% end %>
-	<%= paginate @words_array2, class: "paginate" %>
+	<%= paginate @words_array, class: "paginate" %>
 </div>
