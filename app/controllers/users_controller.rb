@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-	PER=3
 
 	def index
 		@books = Book.all
@@ -8,30 +7,40 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
+		@user = User.find(5)
 		@books = @user.books.with_deleted
 
 		@words_array = []
 		@words_hash = {}
-
+ 		@words_array2 = []#追記
 		@words_array = []
 		@books.each do |book|
 			one_book_morpheme_origins = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or pos like ? ) and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and book_id = ? ","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域","動詞-自立","する","ある","なる","いう","いる", book.id)
-			one_book_morpheme_origins_count = one_book_morpheme_origins.group(:origin).count
-			one_book_morpheme_origins_count_sorted_hash = Hash[one_book_morpheme_origins_count.sort_by{ |_, v| -v } ] #hash化及び、valueの昇順(DESC)でソートする
-			result = one_book_morpheme_origins_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value <= Math.sqrt(one_book_morpheme_origins_count_sorted_hash.first[1]))} #＠hindoのkeyがnilまたはvalueが60未満は除外
+			one_book_morpheme_origins_count = one_book_morpheme_origins.group(:origin).count #{"Kさん"=>1, "…。"=>1, "ああなる"=>3, "あい"=>2, "あいそ"=>1...
+			one_book_morpheme_origins_count_sorted_hash = Hash[one_book_morpheme_origins_count.sort_by{ |_, v| -v } ] #hash化及び、valueの昇順(DESC)でソートする {"先生"=>596, "奥さん"=>386, "思う"=>293, ...
+			result = one_book_morpheme_origins_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value <= Math.sqrt(one_book_morpheme_origins_count_sorted_hash.first[1]))} #＠hindoのkeyがnilまたはvalueが60未満は除外  {"先生"=>596,"奥さん"=>386, "思う"=>293,
 
-			# @frequency_arr = @frequency.to_a #@hindoを二次元配列化。
-			# gon.frequency = @frequency_arr
-			# @hindo.reject{|key,value|(/nil/ =~ key) || (value < 60)} #＠hindoのkeyがnilまたはvalueが60未満は除外
-
-			changed_result = result.map{|v| {text:v[0],size:v[1]}}
-			words = changed_result.to_json.html_safe
+			changed_result = result.map{|v| {text:v[0],size:v[1]}}#[{:text=>"先生", :size=>596}, {:text=>"奥さん", :size=>386}, 
+			words = changed_result.to_json.html_safe #"[{\"text\":\"先生\",\"size\":596},{\"text\":\"奥さん\",\"size\":386}
 			@words_array << words
-			@words_hash[book.id] = words
+			# @words_hash[book.id] = words
+
+			book2 = Book.with_deleted.find(book.id)
+			#book_title = Book.find(book.id).title#追記
+			#book_body = Book.find(book.id).body.truncate(300)#追記
+
+			@words_array2.push({ 
+				book_id: book2.id,#追記
+			    title: book2.title,
+			    body: book2.body,
+			    words_array: words
+			})
+			# binding.pry
 		end
-		@words_hash = Kaminari.paginate_array(@words_hash.keys).page(params[:page]).per(PER)
+		 @words_array2 = Kaminari.paginate_array(@words_array2).page(params[:page]).per(5)
+		# binding.pry
 	end
+	# binding.pry
 
 	def edit
 		@user = User.find(params[:id])

@@ -6,24 +6,25 @@
 		<h5><%= @user.user_name %></h5>
 		<a><%= @user.self_introduction %></a>
 	</div>
+	<% if user_signed_in? %>
 	<div class="profile-right">
 		<%= link_to 'ユーザー情報編集', edit_user_path(@user),id:'submit' ,:class=>"btn waves-effect" %>
+	<% end %>
 	</div>
 </div>
 
 <div class="word_cloud">
-	<% @words_hash.each do |book_id, words_array| %>
+	<% @words_array2.each do |row| %>
 		<div id= "one_book" class="card hoverable">
-			<%= link_to book_path(book_id) do %>
-				<div id="cloud<%= book_id %>" class="cloud_style_show hoverable" data-words=<%= words_array %> ></div>
+			<%= link_to "", book_path(row[:book_id]) %>
+				<div id="cloud<%= row[:book_id] %>" class="cloud_style_show hoverable" data-words=<%= row[:words_array] %> ></div>
 				<div class="one_pro">
-					<div class="one_title"><h3><%= @books.find(book_id).title %></h3></div>
-					<div class="one_body"><p class="body_abbr"><%= @books.find(book_id).body.truncate(300) %></p></div>
+					<div class="one_title"><h3><%= row[:title] %></h3></div>
+					<div class="one_body"><p class="body_abbr"><%= row[:body].truncate(300) %></p></div>
 				</div>
-			<% end %>
 		</div>
 		<script defer>
-			var TARGET_ELEMENT_ID = '#cloud<%= book_id %>' //IDだから#をつける
+			var TARGET_ELEMENT_ID = '#cloud<%= row[:book_id] %>' //IDだから#をつける
 			var cloud = document.querySelector(TARGET_ELEMENT_ID)
 			var words = JSON.parse(cloud.getAttribute('data-words'))
 
@@ -68,5 +69,5 @@
 			}
 		</script>
 	<% end %>
-	<%= paginate @words_hash, class: "paginate" %>
+	<%= paginate @words_array2, class: "paginate" %>
 </div>

@@ -65,13 +65,27 @@
 		border: 1px solid #ccc;
 		margin: 10px;
 		// border-radius: 10px;
+		// position: absolute;
+		z-index: 1;
 	}
 	#one_book {
 		// background-color: #ffffe0;
 		// display: block;
 		border-radius: 10px;
 		margin: 5px;
+		position: relative;
 	}
+	#one_book a{
+		// background-color: #ffffe0;
+		// display: block;
+		border-radius: 10px;
+		margin: 5px;
+		position: absolute;
+	    top: 0;
+	    left: 0;
+	    height:100%;
+	    width: 100%;
+		}
 	.one_pro{
 		// background-color: white;
 		display: inline-block;
