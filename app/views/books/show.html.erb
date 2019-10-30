@@ -3,10 +3,11 @@
 	<%= link_to '作品一覧', books_path  ,id:'submit' ,:class=>"btn waves-effect" %>
 	<%= link_to '解析結果', morpheme_path ,id:'submit' ,:class=>"btn waves-effect" %>
 	<%= link_to '著者の詳細', user_path(@book.user.id),id:'submit' ,:class=>"btn waves-effect" %>
-	<% if current_user.id == @user.id %>
-		| <%= link_to '作品編集', edit_book_path(@book)  ,id:'submit' ,:class=>"btn waves-effect"%>
+	<% if user_signed_in? %>
+		<% if @user.id == current_user.id %>
+			| <%= link_to '作品編集', edit_book_path(@book)  ,id:'submit' ,:class=>"btn waves-effect"%>
+		<% end %>
 	<% end %>
-
 	<div class="book_prof">
 		<span class="text_title"><%= @book.title %></span>
 		<h4 class="text_user"><%= link_to @user.user_name, user_path(@book.user.id) %></h4>
