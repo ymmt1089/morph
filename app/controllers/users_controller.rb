@@ -7,12 +7,12 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(5)
+		@user = User.find(params[:id])
 		@books = @user.books.with_deleted
 
-		@words_array = []
+		# @words_array = []
 		@words_hash = {}
- 		@words_array2 = []#追記
+ 		@words_array = []#追記
 		@words_array = []
 		@books.each do |book|
 			one_book_morpheme_origins = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or pos like ? ) and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and book_id = ? ","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域","動詞-自立","する","ある","なる","いう","いる", book.id)
@@ -22,22 +22,22 @@ class UsersController < ApplicationController
 
 			changed_result = result.map{|v| {text:v[0],size:v[1]}}#[{:text=>"先生", :size=>596}, {:text=>"奥さん", :size=>386}, 
 			words = changed_result.to_json.html_safe #"[{\"text\":\"先生\",\"size\":596},{\"text\":\"奥さん\",\"size\":386}
-			@words_array << words
+			# @words_array << words
 			# @words_hash[book.id] = words
 
-			book2 = Book.with_deleted.find(book.id)
+			book_columns = Book.with_deleted.find(book.id)
 			#book_title = Book.find(book.id).title#追記
 			#book_body = Book.find(book.id).body.truncate(300)#追記
 
-			@words_array2.push({ 
-				book_id: book2.id,#追記
-			    title: book2.title,
-			    body: book2.body,
+			@words_array.push({
+				book_id: book_columns.id,#追記
+			    title: book_columns.title,
+			    body: book_columns.body,
 			    words_array: words
 			})
 			# binding.pry
 		end
-		 @words_array2 = Kaminari.paginate_array(@words_array2).page(params[:page]).per(5)
+		 @words_array = Kaminari.paginate_array(@words_array).page(params[:page]).per(5)
 		# binding.pry
 	end
 	# binding.pry
