@@ -7,9 +7,9 @@
 	<%= link_to "作品一覧画面" ,books_path ,id:'submit' ,:class=>"btn waves-effect"%>
 
 	<% if current_user.id == @user.id %>
-	<%= link_to "公開する" ,books_path(@book.id), method: :post  ,id:'submit' ,:class=>"btn cyan lighten-2 waves-effect"%>
+	<%#= link_to "公開する" ,books_path(@book.id), method: :post  ,id:'submit' ,:class=>"btn cyan lighten-2 waves-effect"%>
 	<%# if  @book_%>
-	<%= link_to "非公開にする" ,book_path(@book.id), method: :delete  ,id:'submit' ,:class=>"btn orange lighten-2  waves-effect"%>
+	<%#= link_to "非公開にする" ,book_path(@book.id), method: :delete  ,id:'submit' ,:class=>"btn orange lighten-2  waves-effect"%>
 	<%= link_to "削除する" ,book_path(@book.id), method: :delete  ,id:'submit' ,:class=>"btn red waves-effect"%></a>
 
 	<% end %>

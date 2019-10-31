@@ -12,4 +12,5 @@ class User < ApplicationRecord
   validates :completed, inclusion: { in: [true, false] }
   validates :user_name, uniqueness: true
   validates :email, uniqueness: true
+  default_scope -> { order(created_at: :desc) }
 end

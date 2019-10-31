@@ -1,15 +1,13 @@
 class BooksController < ApplicationController
 
-	PER=15
+	before_action :authenticate_user!, only:[:index, :show, :edit, :update]
 
 	def index
-
-		#@books = Book.all
 		if params[:keyword]
 			keyword = params[:keyword]
-			@books = Book.joins(:morphemes).where("morphemes.origin like ? ","%#{keyword}%").page(params[:page]).per(PER)
+			@books = Book.joins(:morphemes).where("morphemes.origin like ? ","%#{keyword}%").page(params[:page]).per(15)
 		else
-			@books = Book.all.page(params[:page]).per(PER)
+			@books = Book.all.page(params[:page]).per(15)
 		end
 		@words_array = []
 		@words_hash = {}

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+	before_action :authenticate_user!, only:[ :show, :edit, :update]
 
 	def index
 		@books = Book.all
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
 	def edit
 		@user = User.find(params[:id])
 		if @user.id != current_user.id
-			flash[:notice] = ""
+			flash[:notice] = "編集を完了しました"
 			redirect_to user_path(current_user.id)
 		end
 	end
