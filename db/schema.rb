@@ -41,7 +41,10 @@ ActiveRecord::Schema.define(version: 2019_10_15_040740) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.index ["body"], name: "index_books_on_body"
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
+    t.index ["title"], name: "index_books_on_title"
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "morphemes", force: :cascade do |t|
@@ -54,6 +57,9 @@ ActiveRecord::Schema.define(version: 2019_10_15_040740) do
     t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_morphemes_on_book_id"
+    t.index ["origin"], name: "index_morphemes_on_origin"
+    t.index ["pos"], name: "index_morphemes_on_pos"
   end
 
   create_table "users", force: :cascade do |t|
