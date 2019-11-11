@@ -11,5 +11,10 @@ class CreateMorphemes < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    add_index :morphemes, :origin
+    add_index :morphemes, :pos
+    add_index :morphemes, :book_id
+
   end
 end
