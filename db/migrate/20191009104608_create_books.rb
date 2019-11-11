@@ -9,5 +9,8 @@ class CreateBooks < ActiveRecord::Migration[5.2]
     end
     add_column :books, :deleted_at, :datetime #論理削除用追記
     add_index :books, :deleted_at #論理削除用追記
+    add_index :books, :user_id
+    add_index :books, :title
+    add_index :books, :body
   end
 end

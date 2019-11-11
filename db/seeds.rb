@@ -28,6 +28,11 @@ User.create!(
       user_name:"yyy_name",
     },
     {
+      email:"developer@gmail.com",
+      password: "developer",
+      user_name:"developer",
+    },
+    {
       email: "zzz@zzz",
       password: "zzzzzz",
       user_name:"zzz_name",
