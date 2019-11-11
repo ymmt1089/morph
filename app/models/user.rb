@@ -9,8 +9,13 @@ class User < ApplicationRecord
   has_many :arts
   acts_as_paranoid
 
-  validates :completed, inclusion: { in: [true, false] }
+
   validates :user_name, uniqueness: true
+  validates :user_name, presence: true
   validates :email, uniqueness: true
+  validates :email, presence: true
+  validates :encrypted_password, uniqueness: true
+  validates :encrypted_password, presence: true
+
   default_scope -> { order(created_at: :desc) }
 end
