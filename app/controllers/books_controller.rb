@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 
-	before_action :authenticate_user!, only:[:index, :show, :edit, :update]
+	# before_action :authenticate_user!, only:[:index, :show, :edit, :update]
 
 	def index
 		if params[:keyword]
