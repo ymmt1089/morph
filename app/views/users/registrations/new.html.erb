@@ -1,36 +1,44 @@
-<h2>新規登録画面</h2>
 
+<div class="sign_up_main">
+  <div class="circle_sign_up_1"></div>
+  <div class="circle_sign_up_2"></div>
+  <div class="circle_sign_up_3"></div>
 
-<div class="sign_up_contenar">
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="sign_up_container">
+    <h4 class="sign_up_title">新規登録画面</h4>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :user_name %><br/>
-    <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name" %>
+      <div id="create_user_name" class='input-field'>
+          <i class="icon-prepend fa fa-user" ></i>
+          <%= f.text_field :user_name , autofocus: true ,:html => {:id => "input_user_name" ,:type => "text"}%>
+          <label for="input_a">名前</label>
+      </div>
+
+      <div id="create_email" class='input-field'>
+          <i class="icon-prepend fa fa-user" ></i>
+          <%= f.text_field :email , autofocus: true ,:html => {:id => "input_email" ,:type => "text"}%>
+          <label for="input_a">メールアドレス</label>
+      </div>
+
+      <div id="create_password" class='input-field'>
+          <i class="icon-prepend fa fa-user" ></i>
+          <%= f.password_field :password , autofocus: true ,:html => {:id => "input_password" ,:type => "text"}%>
+          <label for="input_a">パスワード</label>
+      </div>
+
+      <div id="create_password" class='input-field'>
+          <i class="icon-prepend fa fa-user" ></i>
+          <%= f.password_field :password_confirmation , autofocus: true ,:html => {:id => "input_password" ,:type => "text"}%>
+          <label for="input_a">パスワード(確認用)</label>
+      </div>
+
+        <div class="submit_button">
+          <%= f.submit 'サインアップ' , id:'submit', data: {disable_with: '処理中...'} ,:class=>"btn waves-effect"%>
+        </div>
+        <div class="render_box">
+        <%= render "users/shared/links" %>
+        </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :email %><br/>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br/>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br/>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
