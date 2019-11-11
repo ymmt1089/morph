@@ -1,14 +1,14 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.sign_up_main{
+.sign_main{
 	background-color: white;
 	position: relative;
 	width: auto;
 	height: 800px;
 	overflow: hidden;
 }
-    .circle_sign_up_1{
+    .circle_sign_1{
             width: 300px;
             height: 300px;
             border-radius: 50%;
@@ -17,7 +17,7 @@
             top: 170px;
             left: -30px;
     }
-    .circle_sign_up_2{
+    .circle_sign_2{
         width: 1000px;
         height: 1000px;
         border-radius: 50%;
@@ -26,17 +26,8 @@
         top: 400px;
         right: -300px;
     }
-    .circle_sign_up_3{
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        background-color:#d0bad9;
-        position: absolute;
-        top: 170px;
-        left: -30px;
-    }
 
-    .sign_up_container{
+    .sign_container{
         background-color: white;
         width: 50%;
         height: 580px;
@@ -46,7 +37,7 @@
         position: relative;
         z-index: 100;
     }
-        .sign_up_title{
+        .sign_title{
             font-family: Hiragino Mincho ProN;
             text-align: center;
         }
