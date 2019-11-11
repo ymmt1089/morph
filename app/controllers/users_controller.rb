@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	# before_action :authenticate_user!, only:[ :show, :edit, :update]
+	before_action :authenticate_user!, only:[ :show, :edit, :update]
 
 	def index
 		@books = Book.all
@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@books = @user.books.with_deleted
 
-		# @words_array = []
 		@words_hash = {}
  		@words_array = []#追記
 		@words_array = []
