@@ -42,9 +42,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
 
     add_column :users, :deleted_at, :datetime #論理削除用追記
     add_index :users, :deleted_at #論理削除用追記
-    add_index :users, :user_name,            unique: true
-    add_index :users, :email,                unique: true
-    add_index :users, :reset_password_token, unique: true
+    # add_index :users, :user_name,            unique: true
+    # add_index :users, :email,                unique: true
+    # add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end

@@ -5,12 +5,12 @@
 
 <div class="sign_container">
     <h4 class="sign_title">ログイン画面</h4>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div id="create_email" class='input-field'>
           <i class="icon-prepend fa fa-user" ></i>
-          <%= f.text_field :email , autofocus: true ,:html => {:id => "input_email" ,:type => "text"}%>
+          <%= f.email_field :email , autofocus: true ,:html => {:id => "input_email" ,:type => "text"}%>
           <label for="input_a">メールアドレス</label>
       </div>
 
