@@ -5,7 +5,13 @@
 
 
 <div class="sign_container">
-    <h4 class="sign_title">ログイン画面</h4>
+    <h4 class="sign_title">パスワードを忘れてしまった方へ</h4>
+    <div class="sign_pass_text">
+      <p>
+      下記の入力欄にメールアドレスを御入力ください。<br>
+      パスワードの再設定についてメールで御連絡いたします。
+      </p>
+    </div>
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -16,7 +22,7 @@
       </div>
 
         <div class="submit_button">
-          <%= f.submit '管理者問合せ' , id:'submit', data: {disable_with: 'ログイン中...'} ,:class=>"btn waves-effect"%>
+          <%= f.submit 'パスワード再設定メールを送る' , id:'submit', data: {disable_with: '送信中...'} ,:class=>"btn waves-effect"%>
         </div>
 
 
