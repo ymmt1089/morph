@@ -1,16 +1,28 @@
-<h2>Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="sign_main">
+  <div class="circle_sign_1"></div>
+  <div class="circle_sign_2"></div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+<div class="sign_container">
+    <h4 class="sign_title">ログイン画面</h4>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div id="create_email" class='input-field'>
+          <i class="icon-prepend fa fa-user" ></i>
+          <%= f.text_field :email , autofocus: true ,:html => {:id => "input_email" ,:type => "text"}%>
+          <label for="input_a">メールアドレス</label>
+      </div>
+
+        <div class="submit_button">
+          <%= f.submit '管理者問合せ' , id:'submit', data: {disable_with: 'ログイン中...'} ,:class=>"btn waves-effect"%>
+        </div>
+
+
+        <div class="render_box">
+        <%= render "users/shared/links" %>
+        </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
