@@ -78,6 +78,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'rspec-parameterized'
+  gem 'faker', '~> 2.0.0'
+  gem 'shoulda-matchers'
 end
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick", github: 'refile/refile-mini_magick'
