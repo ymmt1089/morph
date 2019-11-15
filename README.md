@@ -1,7 +1,7 @@
 # README
 
 Morph-もおふ。-
-http://ec2-18-176-124-216.ap-northeast-1.compute.amazonaws.com/about
+
 ====
 
 Morphは文章作品の投稿及び閲覧を行うアプリです。
@@ -19,6 +19,8 @@ There are many posting sites for writing works, but this app analyzes the submit
 It is an application that allows you to select works by a new method that is not trapped by information such as cover, title, author name.
 
 ## Demo(sample)
+http://ec2-18-176-124-216.ap-northeast-1.compute.amazonaws.com/about  
+
 About画面
 <img width="1278" alt="スクリーンショット 2019-11-15 15 34 17" src="https://user-images.githubusercontent.com/52972668/68921977-c72c3d00-07bd-11ea-9640-65bb16f43bce.png">
 
@@ -34,9 +36,6 @@ About画面
 
 ## Usage
 
-git clone以降の環境設定などの方法をいかに記述しております。
-It describes how to set the environment after git clone.
-
     git cloneして動作を見る場合、形態素解析を行う為、
     形態素解析ツール(macab)及びMeCab標準のIPA辞書(mecab-ipadic)をインストールする必要があります。
     ※詳しくはInstall項目に記載
@@ -46,7 +45,8 @@ It describes how to set the environment after git clone.
     * For details, see the Install item.
 
 ## Install
-
+    git clone以降の環境設定などの方法をいかに記述しております。
+    It describes how to set the environment after git clone.
         $ git clone https://github.com/ymmt1089/morph.git
         $ cd morph
 
@@ -68,8 +68,8 @@ It describes how to set the environment after git clone.
         $ sudo make install
 
 ## Author
-山本 尚幸 (Naoyuki Yamamoto)　　
-Git: https://github.com/ymmt1089　　
+山本 尚幸 (Naoyuki Yamamoto)  
+Git: https://github.com/ymmt1089  
 mail to: ymmt1089@mail.com
  
 ## License
