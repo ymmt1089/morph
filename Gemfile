@@ -57,6 +57,8 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   # gem 'chromedriver-helper'
   gem 'webdrivers', '~> 3.0'
+  gem 'rspec-rails','~> 3.7'
+  gem 'factory_bot_rails', '~> 4.11'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -75,12 +77,6 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'letter_opener_web', '~> 1.0'
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'rails-controller-testing'
-  gem 'rspec-parameterized'
-  gem 'faker', '~> 2.0.0'
-  gem 'shoulda-matchers'
 end
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick", github: 'refile/refile-mini_magick'
