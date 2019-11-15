@@ -1,6 +1,7 @@
 # README
 
 Morph-もおふ。-
+http://ec2-18-176-124-216.ap-northeast-1.compute.amazonaws.com/about
 ====
 
 Morphは文章作品の投稿及び閲覧を行うアプリです。
@@ -17,15 +18,25 @@ It is also a site where you can visualize and analyze the posted text.
 There are many posting sites for writing works, but this app analyzes the submitted work with morphological analysis,The word cloud is displayed in the work list.
 It is an application that allows you to select works by a new method that is not trapped by information such as cover, title, author name.
 
-## Demo
-
+## Demo(sample)
+About画面
 <img width="1278" alt="スクリーンショット 2019-11-15 15 34 17" src="https://user-images.githubusercontent.com/52972668/68921977-c72c3d00-07bd-11ea-9640-65bb16f43bce.png">
+
+
+解析結果画面
 <img width="1278" alt="スクリーンショット 2019-11-15 15 35 52" src="https://user-images.githubusercontent.com/52972668/68921998-d57a5900-07bd-11ea-904c-5210e36dfe9b.png">
 <img width="1278" alt="スクリーンショット 2019-11-15 15 36 02" src="https://user-images.githubusercontent.com/52972668/68922008-da3f0d00-07bd-11ea-84d2-5c00ca01ed30.png">
+
+
+作品一覧画面
 <img width="1278" alt="スクリーンショット 2019-11-15 15 34 56" src="https://user-images.githubusercontent.com/52972668/68921985-cb585a80-07bd-11ea-9567-801ca73b9884.png">
-<img width="1278" alt="スクリーンショット 2019-11-15 15 35 40" src="https://user-images.githubusercontent.com/52972668/68921992-d27f6880-07bd-11ea-8052-9b712281e393.png">
+
 
 ## Usage
+
+git clone以降の環境設定などの方法をいかに記述しております。
+It describes how to set the environment after git clone.
+
     git cloneして動作を見る場合、形態素解析を行う為、
     形態素解析ツール(macab)及びMeCab標準のIPA辞書(mecab-ipadic)をインストールする必要があります。
     ※詳しくはInstall項目に記載
@@ -57,8 +68,8 @@ It is an application that allows you to select works by a new method that is not
         $ sudo make install
 
 ## Author
-山本 尚幸 (Naoyuki Yamamoto)
-Git: https://github.com/ymmt1089
+山本 尚幸 (Naoyuki Yamamoto)　　
+Git: https://github.com/ymmt1089　　
 mail to: ymmt1089@mail.com
  
 ## License
