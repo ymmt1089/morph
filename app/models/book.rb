@@ -5,7 +5,7 @@ class Book < ApplicationRecord
 	acts_as_paranoid
 	default_scope -> { order(created_at: :desc) }
 	validates :title,    length: { in: 1..75 }
-	# validates :body,    length: { in: 1..22300 }
+	validates :body,    length: { in: 1..22300 }
 	validates :title, presence: true
 	validates :body, presence: true
 end
