@@ -2,7 +2,7 @@
 	font-family: Hiragino Mincho ProN;
 }
 
-.morph_about_main{
+.morph_about_head{
 	background-color: #f8ced9;
 	position: relative;
 	width: auto;
@@ -108,19 +108,89 @@
 		left: 900px;
 		top: 200px;
 	}
-.morph_about_main_2{
+.morph_about_main{
 	// background-color: #f8ced9;
 	margin: 0 auto;
-	width: 90%;
+	// width: 90%;
 	// height: 800px;
 }
 	.about_morph{
 		text-align: center;
-		margin: 200px auto;
-		// background-color: red;
+		margin: 300px auto 200px auto;
+		width: 80%;
 	}
+		.about_morph_title{
+			margin: auto;
+		}
+		.about_morph_body{
+			border-radius: 50px;
+			box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.1);
+			padding-top: 80px;
+			padding-bottom: 100px;
+			margin: 30px auto;
+		}
+
 	.about_purpose{
 		text-align: center;
-		margin: 200px auto 0 auto;
-		// background-color: yellow;
+		margin: 200px auto 200px auto;
+		padding-bottom: 20px;
+		// background-color: #f8ced9;
 	}
+		#purpose{
+			margin: auto;
+			// background-color: whitesmoke;
+			border-radius: 10px;
+		}
+		.about_purpose_1{
+			text-align: center;
+			// margin: 200px auto 0 auto;
+			// background-color: whitesmoke;
+			padding: 100px 100px;
+			margin: 30px auto;
+			width: 80%;
+			border-radius: 50px;
+			box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.1);
+		}
+		.about_purpose_2{
+			text-align: center;
+			// margin: 200px auto 0 auto;
+			// background-color: whitesmoke;
+			padding: 100px 100px;
+			margin: 30px auto;
+			width: 80%;
+			border-radius: 50px;
+			box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.1);
+		}
+		.about_purpose_3{
+			text-align: center;
+			// margin: 200px auto 0 auto;
+			// background-color: whitesmoke;
+			padding: 100px 100px;
+			margin: 30px auto;
+			width: 80%;
+			border-radius: 50px;
+			box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.1);
+		}
+		.about_purpose_4{
+			text-align: center;
+			// margin: 200px auto 0 auto;
+			// background-color: whitesmoke;
+			padding: 100px;
+			margin: 30px auto 0 auto;
+			width: 80%;
+			border-radius: 50px;
+			box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.1);
+		}
+	.about_buttom{
+		text-align: center;
+		margin: 200px auto 200px auto;
+		width: 80%;
+	}
+		#about_submit{
+			padding: auto;
+			text-align: center;
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			background-color:#67b6a0;
+		}
