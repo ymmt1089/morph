@@ -73,6 +73,52 @@ class MorphemesController < ApplicationController
 		table_hinshi = table_hinshi.map{|v| {hinshi:v[0],count:v[1]}}
 		table_hinshi_changed_json = table_hinshi.to_json.html_safe
 		@table_hinshi_graph = table_hinshi_changed_json
+
+
+		# 以下感情分析
+		# 感情分析用配列
+		@sentimental_changed_result = result.map{|v| {text:v[0]}}
+		# sentimental_words = sentimental_changed_result.to_json.html_safe
+
+
+
+		# 単語感情極性対応データベース格納用配列
+		list_db = Array.new
+
+		# 'db.txt'は単語感情極性対応データベースを保存したテキストファイル
+		File.open('db.txt', 'r') do |file|
+			file.each{ |line|
+				h = Hash.new
+				# 単語
+				h['text'.to_sym] = line.chomp.split(':')[0]
+				# 感情値
+				h['semantic_orientations'.to_sym] = line.chomp.split(':')[3]
+
+				list_db << h
+			}
+		end
+
+		# 感情値格納用配列
+		list_semantic = Array.new
+
+		# 形態素解析結果を格納した配列から各ツイートの形態素解析結果に展開
+		@sentimental_changed_result.each{ |e|
+			tmp = Array.new
+			e.each{ |h|
+				list_db.each{ |line|
+					# 単語、読み、品詞が一致の場合、感情値をカウント
+					binding.pry
+					if h[:text] == line[:text] then
+						tmp.push line[:semantic_orientations]
+					end
+				}
+			}
+			# カウントした感情値の平均値
+			semantic_ave = tmp.inject(0){ |sum, i| sum += i.to_f} / tmp.size unless tmp.size == 0
+
+			list_semantic.push semantic_ave
+		}
+
 	end
 
 	def index
@@ -87,6 +133,7 @@ class MorphemesController < ApplicationController
 		changed_result = result.map{|v| {text:v[0],size:v[1]}}
 		words = changed_result.to_json.html_safe
 		@words_array = words
+
 
 		# 以下グラフ用
 		# 名詞のみの頻出度
