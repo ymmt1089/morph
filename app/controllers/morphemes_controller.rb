@@ -75,16 +75,13 @@ class MorphemesController < ApplicationController
 		@table_hinshi_graph = table_hinshi_changed_json
 
 
-		# 以下感情分析
+	# 以下感情分析
 		# 感情分析用配列
-		# sentimental_words = sentimental_changed_result.to_json.html_safe
 		one_book_morpheme_origins_all = Morpheme.where(book_id: @book.id)
 		one_book_morpheme_origins_count_all = one_book_morpheme_origins_all.group(:origin).count
 		one_book_morpheme_origins_count_sorted_hash_all = Hash[one_book_morpheme_origins_count_all.sort_by{ |_, v| -v } ]
 		result_all = one_book_morpheme_origins_count_sorted_hash_all.reject{|key,value|(/nil/ =~ key) || (value <= 0)}
-		@changed_result = result_all.map{|v| {text:v[0],size:v[1]}}
-		words = @changed_result.to_json.html_safe
-
+		@sentimental_result = result_all.map{|v| {text:v[0],size:v[1]}} #全形態素の配列
 
 		# 単語感情極性対応データベース格納用配列
 		list_db = Array.new
@@ -92,13 +89,12 @@ class MorphemesController < ApplicationController
 		# 'db.txt'は単語感情極性対応データベースを保存したテキストファイル
 		File.open('db.txt', 'r') do |file|
 			file.each{ |line|
-				h = Hash.new
+				hash = Hash.new
 				# 単語
-				h['text'.to_sym] = line.chomp.split(':')[0]
+				hash['text'.to_sym] = line.chomp.split(':')[0]
 				# 感情値
-				h['semantic_orientations'.to_sym] = line.chomp.split(':')[3]
-
-				list_db << h
+				hash['semantic_orientations'.to_sym] = line.chomp.split(':')[3]
+				list_sentimental << h
 			}
 		end
 
@@ -106,10 +102,10 @@ class MorphemesController < ApplicationController
 		list_semantic = Array.new
 
 		# 形態素解析結果を格納した配列から各ツイートの形態素解析結果に展開
-		@changed_result.each{ |e|
+		@sentimental_result.each{ |e|
 			tmp = Array.new
 			e.each{ |h|
-				list_db.each{ |line|
+				list_sentimental.each{ |line|
 					# 単語、読み、品詞が一致の場合、感情値をカウント
 					if h[1] == line[:text] then
 						tmp.push line[:semantic_orientations]
@@ -121,7 +117,6 @@ class MorphemesController < ApplicationController
 
 			list_semantic.push semantic_ave
 		}
-binding.pry
 	end
 
 	def index
