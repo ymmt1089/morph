@@ -104,7 +104,7 @@ class MorphemesController < ApplicationController
 			@tmp = Array.new
 			e.each{ |h|
 				@list_sentimental_db.each{ |line|
-					binding.pry
+
 					# 単語、読み、品詞が一致の場合、感情値をカウント
 					if e[:text] == line[:text] then
 						@tmp.push line[:semantic_orientations]
