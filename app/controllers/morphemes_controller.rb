@@ -77,7 +77,7 @@ class MorphemesController < ApplicationController
 
 	# 以下感情分析
 		# 感情分析用配列
-		one_book_morpheme_origins_all = Morpheme.where("(pos not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ?) and book_id = ?","記号","する","ある","なる","いう","いる" ,@book.id)
+		one_book_morpheme_origins_all = Morpheme.where("(pos not like ? and pos not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ?) and book_id = ?","%記号%","助詞%","する","ある","なる","いう","いる" ,@book.id)
 		one_book_morpheme_origins_count_all = one_book_morpheme_origins_all.group(:origin).count
 		one_book_morpheme_origins_count_sorted_hash_all = Hash[one_book_morpheme_origins_count_all.sort_by{ |_, v| -v } ]
 		result_all = one_book_morpheme_origins_count_sorted_hash_all.reject{|key,value|(/nil/ =~ key) || (value <= 0)}
