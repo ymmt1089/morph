@@ -104,7 +104,6 @@ class MorphemesController < ApplicationController
 			@tmp = Array.new
 			e.each{ |h|
 				@list_sentimental_db.each{ |line|
-# binding.pry
 					# 単語、読み、品詞が一致の場合、感情値をカウント
 					if e[:text] == line[:text] then
 						@tmp.push line[:semantic_orientations]
@@ -115,7 +114,12 @@ class MorphemesController < ApplicationController
 			@semantic_ave = @tmp.inject(0){ |sum, i| sum += i.to_f} / @tmp.size unless @tmp.size == 0
 			@list_semantic.push @semantic_ave
 		}
-
+		sum_semantic_score = 0
+		@list_semantic.each do |score|
+			sum_semantic_score = sum_semantic_score + score
+		end
+		semantic_average = sum_semantic_score/@list_semantic.length
+		@semantic_average_par = (semantic_average*100).round(2)
 	end
 
 	def index
