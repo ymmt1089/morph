@@ -81,44 +81,41 @@ class MorphemesController < ApplicationController
 		one_book_morpheme_origins_count_all = one_book_morpheme_origins_all.group(:origin).count
 		one_book_morpheme_origins_count_sorted_hash_all = Hash[one_book_morpheme_origins_count_all.sort_by{ |_, v| -v } ]
 		result_all = one_book_morpheme_origins_count_sorted_hash_all.reject{|key,value|(/nil/ =~ key) || (value <= 0)}
-		@sentimental_result = result_all.map{|v| {text:v[0],size:v[1]}} #全形態素の配列
-		# words = changed_result.to_json.html_safe
-		# @words_array = words
+		sentimental_result = result_all.map{|v| {text:v[0],size:v[1]}} #全形態素の配列
 		# 単語感情極性対応データベース格納用配列
-		@list_sentimental_db = Array.new
+		list_sentimental_db = Array.new
 		# 'db.txt'は単語感情極性対応データベースを保存したテキストファイル
 		File.open('sentimental_db.txt', 'r') do |file|
-			file.each{ |line|
+			file.each{ |db|
 				hash = Hash.new
 				# 単語
-				hash['text'.to_sym] = line.chomp.split(':')[0]
+				hash['text'.to_sym] = db.chomp.split(':')[0]
 				# 感情値
-				hash['semantic_orientations'.to_sym] = line.chomp.split(':')[3]
-				@list_sentimental_db << hash
+				hash['semantic_orientations'.to_sym] = db.chomp.split(':')[3]
+				list_sentimental_db << hash
 			}
 		end
 		# 感情値格納用配列
-		@list_semantic = Array.new
+		semantic_arr = Array.new
 		# 形態素解析結果を格納した配列から各ツイートの形態素解析結果に展開
-		@sentimental_result.each{ |e|
-			@tmp = Array.new
-			e.each{ |h|
-				@list_sentimental_db.each{ |line|
+		sentimental_result.each{ |result|
+			tmp = Array.new
+			result.each{ |h|
+				list_sentimental_db.each{ |db|
 					# 単語、読み、品詞が一致の場合、感情値をカウント
-					if e[:text] == line[:text] then
-						@tmp.push line[:semantic_orientations]
+					if result[:text] == db[:text] then
+						tmp.push db[:semantic_orientations]
 					end
 				}
 			}
 			# カウントした感情値の平均値
-			@semantic_ave = @tmp.inject(0){ |sum, i| sum += i.to_f} / @tmp.size unless @tmp.size == 0
-			@list_semantic.push @semantic_ave
+			semantic_ave = tmp.inject(0){ |sum, i| sum += i.to_f} / tmp.size unless tmp.size == 0
+			semantic_arr.push semantic_ave
+
 		}
-		sum_semantic_score = 0
-		@list_semantic.each do |score|
-			sum_semantic_score = sum_semantic_score + score
-		end
-		semantic_average = sum_semantic_score/@list_semantic.length
+		semantic_arr_compact = semantic_arr.compact
+		sum_semantic_compact_sum = semantic_arr_compact.sum
+		semantic_average = sum_semantic_compact_sum/semantic_arr_compact.length
 		@semantic_average_par = (semantic_average*100).round(2)
 	end
 
