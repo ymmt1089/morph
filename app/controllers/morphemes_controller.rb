@@ -77,11 +77,12 @@ class MorphemesController < ApplicationController
 
 	# 以下感情分析
 		# 感情分析用配列
-		one_book_morpheme_origins_all = Morpheme.where(book_id: @book.id)
+		one_book_morpheme_origins_all = Morpheme.where("(pos not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ?) and book_id = ?","記号","する","ある","なる","いう","いる" ,@book.id)
 		one_book_morpheme_origins_count_all = one_book_morpheme_origins_all.group(:origin).count
 		one_book_morpheme_origins_count_sorted_hash_all = Hash[one_book_morpheme_origins_count_all.sort_by{ |_, v| -v } ]
 		result_all = one_book_morpheme_origins_count_sorted_hash_all.reject{|key,value|(/nil/ =~ key) || (value <= 0)}
 		sentimental_result = result_all.map{|v| {text:v[0],size:v[1]}} #全形態素の配列
+		sentimental_result = sentimental_result.compact
 		# 単語感情極性対応データベース格納用配列
 		list_sentimental_db = Array.new
 		# 'db.txt'は単語感情極性対応データベースを保存したテキストファイル
@@ -104,7 +105,7 @@ class MorphemesController < ApplicationController
 				list_sentimental_db.each{ |db|
 					# 単語、読み、品詞が一致の場合、感情値をカウント
 					if result[:text] == db[:text] then
-						tmp.push db[:semantic_orientations]
+						tmp.push (db[:semantic_orientations])
 					end
 				}
 			}
@@ -115,7 +116,7 @@ class MorphemesController < ApplicationController
 		}
 		semantic_arr_compact = semantic_arr.compact
 		sum_semantic_compact_sum = semantic_arr_compact.sum
-		semantic_average = sum_semantic_compact_sum/semantic_arr_compact.length
+		semantic_average = sum_semantic_compact_sum / semantic_arr_compact.length
 		@semantic_average_par = (semantic_average*100).round(2)
 	end
 
