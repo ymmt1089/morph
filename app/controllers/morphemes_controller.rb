@@ -75,47 +75,47 @@ class MorphemesController < ApplicationController
 		@table_hinshi_graph = table_hinshi_changed_json
 
 
-	# 以下感情分析
-		# 感情分析用配列
-		one_book_morpheme_origins_all = Morpheme.where("(pos not like ? and pos not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ?) and book_id = ?","%記号%","助詞%","する","ある","なる","いう","いる" ,@book.id)
-		one_book_morpheme_origins_count_all = one_book_morpheme_origins_all.group(:origin).count
-		one_book_morpheme_origins_count_sorted_hash_all = Hash[one_book_morpheme_origins_count_all.sort_by{ |_, v| -v } ]
-		result_all = one_book_morpheme_origins_count_sorted_hash_all.reject{|key,value|(/nil/ =~ key) || (value <= 0)}
-		sentimental_result = result_all.map{|v| {text:v[0],size:v[1]}} #全形態素の配列
-		sentimental_result = sentimental_result.compact
-		# 単語感情極性対応データベース格納用配列
-		list_sentimental_db = Array.new
-		# 'db.txt'は単語感情極性対応データベースを保存したテキストファイル
-		File.open('sentimental_db.txt', 'r') do |file|
-			file.each{ |db|
-				hash = Hash.new
-				hash['text'.to_sym] = db.chomp.split(':')[0]#単語（origin）
-				hash['semantic_orientations'.to_sym] = db.chomp.split(':')[3]#感情値
-				list_sentimental_db << hash
-			}
-		end
-		# 感情値格納用配列
-		semantic_arr = Array.new
-		# 形態素解析結果を格納した配列から各ツイートの形態素解析結果に展開
-		sentimental_result.each{ |result|
-			tmp = Array.new
-			result.each{ |h|
-				list_sentimental_db.each{ |db|
-					# 単語、読み、品詞が一致の場合、感情値をカウント
-					if result[:text] == db[:text] then
-						tmp.push (db[:semantic_orientations])
-					end
-				}
-			}
-			# カウントした感情値の平均値
-			semantic_ave = tmp.inject(0){ |sum, i| sum += i.to_f} / tmp.size unless tmp.size == 0
-			semantic_arr.push semantic_ave
+	# # 以下感情分析
+	# 	# 感情分析用配列
+	# 	one_book_morpheme_origins_all = Morpheme.where("(pos not like ? and pos not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ?) and book_id = ?","%記号%","助詞%","する","ある","なる","いう","いる" ,@book.id)
+	# 	one_book_morpheme_origins_count_all = one_book_morpheme_origins_all.group(:origin).count
+	# 	one_book_morpheme_origins_count_sorted_hash_all = Hash[one_book_morpheme_origins_count_all.sort_by{ |_, v| -v } ]
+	# 	result_all = one_book_morpheme_origins_count_sorted_hash_all.reject{|key,value|(/nil/ =~ key) || (value <= 0)}
+	# 	sentimental_result = result_all.map{|v| {text:v[0],size:v[1]}} #全形態素の配列
+	# 	sentimental_result = sentimental_result.compact
+	# 	# 単語感情極性対応データベース格納用配列
+	# 	list_sentimental_db = Array.new
+	# 	# 'db.txt'は単語感情極性対応データベースを保存したテキストファイル
+	# 	File.open('sentimental_db.txt', 'r') do |file|
+	# 		file.each{ |db|
+	# 			hash = Hash.new
+	# 			hash['text'.to_sym] = db.chomp.split(':')[0]#単語（origin）
+	# 			hash['semantic_orientations'.to_sym] = db.chomp.split(':')[3]#感情値
+	# 			list_sentimental_db << hash
+	# 		}
+	# 	end
+	# 	# 感情値格納用配列
+	# 	semantic_arr = Array.new
+	# 	# 形態素解析結果を格納した配列から各ツイートの形態素解析結果に展開
+	# 	sentimental_result.each{ |result|
+	# 		tmp = Array.new
+	# 		result.each{ |h|
+	# 			list_sentimental_db.each{ |db|
+	# 				# 単語、読み、品詞が一致の場合、感情値をカウント
+	# 				if result[:text] == db[:text] then
+	# 					tmp.push (db[:semantic_orientations])
+	# 				end
+	# 			}
+	# 		}
+	# 		# カウントした感情値の平均値
+	# 		semantic_ave = tmp.inject(0){ |sum, i| sum += i.to_f} / tmp.size unless tmp.size == 0
+	# 		semantic_arr.push semantic_ave
 
-		}
-		semantic_arr_compact = semantic_arr.compact
-		sum_semantic_compact_sum = semantic_arr_compact.sum
-		semantic_average = sum_semantic_compact_sum / semantic_arr_compact.length
-		@semantic_average_par = (semantic_average*100).round(2)
+	# 	}
+	# 	semantic_arr_compact = semantic_arr.compact
+	# 	sum_semantic_compact_sum = semantic_arr_compact.sum
+	# 	semantic_average = sum_semantic_compact_sum / semantic_arr_compact.length
+	# 	@semantic_average_par = (semantic_average*100).round(2)
 	end
 
 	def index

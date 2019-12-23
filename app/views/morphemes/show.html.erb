@@ -10,6 +10,7 @@
   </div>
 
   <div class="table_all">
+  <h3>-頻出度解析結果-</h3>
     <% if @table_meishi.present? %>
     <div class="table_meishi">
       <div id="meishi_graph" data-words=<%= @meishis_array %>></div>
@@ -63,6 +64,43 @@
       </table>
     </div>
     <% end %>
+
+  <%# 以下感情分析表示用 %>
+  <%@semantic_average_par=100%>
+  <div class="sematic_all">
+    <h3>-感情分析結果-</h3>
+    <div class="sematic_block">
+      <h2><%=@semantic_average_par%>%</h2>
+      <%if @semantic_average_par > 95%>
+        <p>非常にポジティブな文章です</p>
+      <%elsif @semantic_average_par > 80%>
+        <p>ポジティブな文章です</p>
+      <%elsif @semantic_average_par > 60%>
+        <p>まあまあポジティブな文章です</p>
+      <%elsif @semantic_average_par > 40%>
+        <p>少しポジティブな文章です</p>
+      <%elsif @semantic_average_par > 20%>
+        <p>ほんの少しポジティブな文章です</p>
+      <%elsif @semantic_average_par > 0%>
+        <p>ポジティブよりの平均的な文章です</p>
+      <%elsif @semantic_average_par < -95%>
+        <p>非常にネガティブな文章です</p>
+      <%elsif @semantic_average_par < -80%>
+        <p>ネガティブな文章です</p>
+      <%elsif @semantic_average_par < -60%>
+        <p>まあまあネガティブな文章です</p>
+      <%elsif @semantic_average_par < -40%>
+        <p>少しネガティブな文章です</p>
+      <%elsif @semantic_average_par < -20%>
+        <p>ほんの少しネガティブな文章です</p>
+      <%elsif @semantic_average_par < 0%>
+        <p>ネガティブよりの平均的な文章です</p>
+      <%else%>
+        <p>平凡な文章です</p>
+      <%end%>
+    </div>
+  </div>
+
   </div>
 </div>
 
@@ -327,5 +365,3 @@
   }
   </script>
 
-<%# 以下感情分析表示用 %>
-<%=@semantic_average_par%>
