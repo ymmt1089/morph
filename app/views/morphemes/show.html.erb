@@ -113,14 +113,9 @@
   }
 </script>
 
-
-
-
-
 <!-- 以下名詞円グラフ -->
 <script>
   // 1. データの準備
-
   var dataset = <%= @table_maishi_graph %>;
   console.log(dataset)//wordsの値をコンソール上に実行できる便利
   var width = 200; // グラフの幅
@@ -333,32 +328,4 @@
   </script>
 
 <%# 以下感情分析表示用 %>
-@sentimental_result
-<%= @sentimental_result %>
--------------
-<%# @list_sentimental_db %>
-<%#= @list_sentimental_db %>
----------------
-@list_semantic
-<%= @list_semantic %>
----------------
-@tmp
-<%= @tmp%>
-----------------
-@semantic_ave
-<%= @semantic_ave%>
--------------
-@list_semantic
-<%=@list_semantic%>
-
-
-
-
-active
-active
-active
-<p></p>
-
-
-<p></p>
 <%=@semantic_average_par%>

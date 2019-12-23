@@ -89,10 +89,8 @@ class MorphemesController < ApplicationController
 		File.open('sentimental_db.txt', 'r') do |file|
 			file.each{ |db|
 				hash = Hash.new
-				# 単語
-				hash['text'.to_sym] = db.chomp.split(':')[0]
-				# 感情値
-				hash['semantic_orientations'.to_sym] = db.chomp.split(':')[3]
+				hash['text'.to_sym] = db.chomp.split(':')[0]#単語（origin）
+				hash['semantic_orientations'.to_sym] = db.chomp.split(':')[3]#感情値
 				list_sentimental_db << hash
 			}
 		end
