@@ -122,8 +122,8 @@ class BooksController < ApplicationController
 		sum_semantic_compact_sum = semantic_arr_compact.sum
 		semantic_average = sum_semantic_compact_sum / semantic_arr_compact.length
 		@semantic_average_par = (semantic_average*100).round(2)
-
-		# ここにbookモデルの新規からむ、感情値に保存する
+		@book.sentiment = @semantic_average_par
+		@book.save
 
       else
       	render :new
