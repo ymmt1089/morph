@@ -10,6 +10,7 @@
   </div>
 
   <div class="table_all">
+  <h3>-頻出度解析結果-</h3>
     <% if @table_meishi.present? %>
     <div class="table_meishi">
       <div id="meishi_graph" data-words=<%= @meishis_array %>></div>
@@ -63,6 +64,42 @@
       </table>
     </div>
     <% end %>
+
+  <%# 以下感情分析表示用 %>
+  <div class="sematic_all">
+    <h3>-感情分析結果-</h3>
+    <div class="sematic_block">
+      <h2><%=@book.sentiment %>%</h2>
+      <%if @book.sentiment > 95%>
+        <p>非常にポジティブな文章です</p>
+      <%elsif @book.sentiment > 80%>
+        <p>ポジティブな文章です</p>
+      <%elsif @book.sentiment > 60%>
+        <p>まあまあポジティブな文章です</p>
+      <%elsif @book.sentiment > 40%>
+        <p>少しポジティブな文章です</p>
+      <%elsif @book.sentiment > 20%>
+        <p>ほんの少しポジティブな文章です</p>
+      <%elsif @book.sentiment > 0%>
+        <p>ポジティブよりの平均的な文章です</p>
+      <%elsif @book.sentiment < -95%>
+        <p>非常にネガティブな文章です</p>
+      <%elsif @book.sentiment < -80%>
+        <p>ネガティブな文章です</p>
+      <%elsif @book.sentiment < -60%>
+        <p>まあまあネガティブな文章です</p>
+      <%elsif @book.sentiment < -40%>
+        <p>少しネガティブな文章です</p>
+      <%elsif @book.sentiment < -20%>
+        <p>ほんの少しネガティブな文章です</p>
+      <%elsif @book.sentiment < 0%>
+        <p>ネガティブよりの平均的な文章です</p>
+      <%else%>
+        <p>平凡な文章です</p>
+      <%end%>
+    </div>
+  </div>
+
   </div>
 </div>
 
@@ -113,14 +150,9 @@
   }
 </script>
 
-
-
-
-
 <!-- 以下名詞円グラフ -->
 <script>
   // 1. データの準備
-
   var dataset = <%= @table_maishi_graph %>;
   console.log(dataset)//wordsの値をコンソール上に実行できる便利
   var width = 200; // グラフの幅
@@ -332,33 +364,3 @@
   }
   </script>
 
-<%# 以下感情分析表示用 %>
-@sentimental_result
-<%= @sentimental_result %>
--------------
-<%# @list_sentimental_db %>
-<%#= @list_sentimental_db %>
----------------
-@list_semantic
-<%= @list_semantic %>
----------------
-@tmp
-<%= @tmp%>
-----------------
-@semantic_ave
-<%= @semantic_ave%>
--------------
-@list_semantic
-<%=@list_semantic%>
-
-
-
-
-active
-active
-active
-<p></p>
-
-
-<p></p>
-<%=@semantic_average_par%>
