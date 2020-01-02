@@ -3,9 +3,6 @@ class BooksController < ApplicationController
 	before_action :authenticate_user!, only:[:edit, :update]
 
 	def index
-		# @search = Book.search(params[:q]) #ransack用
-		# @books_result = @search.result #ransack用
-
 		if params[:keyword]
 			keyword = params[:keyword]
 			unless keyword.blank?
