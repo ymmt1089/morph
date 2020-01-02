@@ -6,7 +6,7 @@
 		<%= form_tag(books_path,method: :get ) do %>
 		<i id="search_submit" class="icon-prepend fa fa-user"></i>
 		<%= submit_tag "検索" , data: {disable_with: '検索中...'} ,:class=>"btn waves-effect",id:'search_submit'%>
-	  	<%= text_field_tag :keyword => {:class => "input-field",:type => "text"}, id: "search_form" %>
+	  	<%= text_field_tag :keyword ,params[:keyword], {class: "input-field",type: "text", id: "search_form"} %>
 		<% end %>
 	</div>
 
