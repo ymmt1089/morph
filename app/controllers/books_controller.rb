@@ -8,7 +8,11 @@ class BooksController < ApplicationController
 
 		if params[:keyword]
 			keyword = params[:keyword]
-			@books = Book.joins(:morphemes).where("morphemes.origin like ? ","%#{keyword}%").page(params[:page]).per(15)
+			unless keyword.blank?
+				@books = Book.joins(:morphemes).where("morphemes.origin like ? ","%#{keyword}%").page(params[:page]).per(15)
+			else
+				@books = Book.all.page(params[:page]).per(15)
+			end
 		else
 			@books = Book.all.page(params[:page]).per(15)
 		end
