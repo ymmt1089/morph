@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 <div class="books_index">
 	<h1 class="page_title">作品一覧</h1>
-	<%# <div class="search_field">
-		<%= form_tag('/',method: :get ) do %>
-		<%# <i id="search_submit" class="icon-prepend fa fa-user"></i>
-		<%= submit_tag "検索" , data: {disable_with: '検索中...'} ,:class=>"btn waves-effect",id:'search_submit'%>
-	  	<%# <%= text_field_tag :html => {:class => "input-field",:type => "text"}, id: "search_form" %>
-		<%# <% end %> %>
-	</div> %> %> %>
 
-	<div class=>
+<%# 検索機能保留 %>
+	<%# <div class="search_field"> %>
+		<%#= form_tag('/',method: :get ) do %>
+		<%# <i id="search_submit" class="icon-prepend fa fa-user"></i> %>
+		<%#= submit_tag "検索" , data: {disable_with: '検索中...'} ,:class=>"btn waves-effect",id:'search_submit'%>
+	  	<%#= text_field_tag :html => {:class => "input-field",:type => "text"}, id: "search_form" %>
+		<%# end %>
+	<%# </div> %>
 
 	<div class="all_word_clouds">
 		<% @words_hash.each do |book_id, words_array| %>
