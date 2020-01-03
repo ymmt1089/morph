@@ -7,10 +7,8 @@
 	font-family: Hiragino Mincho ProN;
 	font-size: 50px;
 	white-space: pre-wrap;
-	ward-warp: break-word;
+	word-wrap: break-word;
 	margin: 0 20px;
-}
-.text_box{
 }
 .text_user{
 	text-align: right;
@@ -21,9 +19,7 @@
 	white-space: pre-wrap;
 }
 .book_prof{
-	// background-color: orange;
 	width: 100%;
-
 }
 .text_box{
 	background-color: #f0f8ff

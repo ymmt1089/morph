@@ -1,11 +1,12 @@
 <p id="notice"><%= notice %></p>
 <div class="books_index">
 	<h1 class="page_title">作品一覧</h1>
+
 	<div class="search_field">
-		<%= form_tag('/',method: :get ) do %>
-		<i id="search_submit" class="icon-prepend fa fa-user"></i>
-		<%= submit_tag "検索" , data: {disable_with: '検索中...'} ,:class=>"btn waves-effect",id:'search_submit'%>
-	  	<%= text_field_tag :html => {:class => "input-field",:type => "text"}, id: "search_form" %>
+		<%= form_tag(books_path,method: :get ) do %>
+			<i id="search_submit" class="icon-prepend fa fa-user"></i>
+			<%= submit_tag "検索" , data: {disable_with: '検索中...'} ,:class=>"btn waves-effect",id:'search_submit'%>
+			<%= text_field_tag :keyword ,params[:keyword], {class: "input-field",type: "text", id: "search_form"} %>
 		<% end %>
 	</div>
 
@@ -15,12 +16,12 @@
 				<div id="cloud<%= book_id %>" class="cloud_style  hoverable" data-words=<%= words_array %> ></div>
 			<% end %>
 
+			<%#以下ワードクラウドの記述。部分テンプレート化必須%>
 			<script defer>
-				var TARGET_ELEMENT_ID = '#cloud<%= book_id %>' //IDだから#をつける
+				var TARGET_ELEMENT_ID = '#cloud<%= book_id %>'
 				var cloud = document.querySelector(TARGET_ELEMENT_ID)
 				var words = JSON.parse(cloud.getAttribute('data-words'))
 
-				//width, height
 				var w = 800, //表示画面の横幅
 				    h = 800 //表示画面の縦幅
 
@@ -60,6 +61,7 @@
 				      .text(function(d) { return d.text; });
 				}
 			</script>
+
 		<% end %>
 		<%= paginate @books, class: "paginate" %>
 	</div>

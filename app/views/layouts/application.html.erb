@@ -48,38 +48,10 @@
         </nav>
     </header>
     <ul id="slide-out" class="sidenav">
-  <li>
-    <div class="user-view">
-      <div class="background">
-        <img src="/img/background.png">
-      </div>
-      <a href="https://twitter.com/ghg02770"><img class="circle" src="/img/tsuka.png"></a>
-      <a href="https://twitter.com/ghg02770"><span class="white-text name">tsuka</span></a>
-    </div>
-  </li>
   <li><a href="/css/">CSS</a></li>
   <li><a href="/html/">HTML</a></li>
   <li><a href="/javascript/">JavaScript</a></li>
 </ul>
-<!--       <ul>
-        <%# if user_signed_in? %>
-        <li class="about"><%#= link_to 'about', about_path, data: {"turbolinks" => false} %></li>
-        <li class="mypage"><%#= link_to 'マイページ', user_path(current_user.id), data: {"turbolinks" => false} %></li>
-        <li class="books"><%#= link_to '作品一覧', books_path, data: {"turbolinks" => false} %></li>
-        <li class="new_book"><%#= link_to '作品投稿', new_book_path %></li>
-        <li class="logout"><%#= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-        <%# elsif admin_signed_in? %>
-        <li><%#= link_to '作品一覧', books_path, data: {"turbolinks" => false} %></li>
-        <li><%#= link_to 'ユーザ一覧', users_path, data: {"turbolinks" => false} %></li>
-        <li><%#= link_to '作品投稿', new_book_path %></li>
-        <li><%#= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
-        <%# else %>
-        <li><%#= link_to 'about', about_path %></li>
-        <li><%#= link_to '作品一覧', books_path, data: {"turbolinks" => false} %></li>
-        <li><%#= link_to 'サインアップ', new_user_registration_path %></li>
-        <li><%#= link_to 'サインイン', new_user_session_path %></li>
-        <%# end %>
-      </ul> -->
     <%= yield %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </body>
@@ -91,13 +63,14 @@
     <div class="row">
       <div class="col s6">
         <h5 id="footer_font" class="white-text" >MôRPH  - もおふ。-</h5>
-        <p class="white-text" >あなたの文章に新たな価値を発掘するサイト</p>
+        <p class="white-text" >MôRPHはあなたの文章に新たな価値を発掘するサイトです</p>
       </div>
       <div class="col s6">
         <h5 class="white-text">参考文献</h5>
         <ul>
-          <li><a href="http://taku910.github.io/mecab/" target="_blank" class="white-text">形態素解析エンジン(MeCab)とは</a></li>
-          <li><a href="https://github.com/markburns/mecab" target="_blank" class="white-text" >MeCab</a></li>
+          <li><a href="http://taku910.github.io/mecab/" target="_blank" class="white-text">「MeCab (和布蕪)とは」</a></li>
+          <li><a href="https://github.com/markburns/mecab" target="_blank" class="white-text" >「MeCab ruby binding with gemspec」</a></li>
+          <li><a href="http://www.lr.pi.titech.ac.jp/~takamura/pndic_en.html" target="_blank" class="white-text">Hiroya Takamura,2005「Semantic Orientations of Words」</a></li>
         </ul>
       </div>
     </div>
