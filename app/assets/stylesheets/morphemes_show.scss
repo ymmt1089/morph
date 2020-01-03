@@ -8,21 +8,14 @@
 	margin: 10px;
 	font-family: Hiragino Mincho ProN;
 }
-.dataset{
-	// width: 500px;
-	// height: 500px;
-}
 .morpheme_show{
-	// background-color: orange;
 	width: 90%;
 	margin: 0 auto;
 }
 	.morph_main{
-		// background-color: red;
 		position:relative;
 	}
 		.user_prof{
-			// background-color: yellow;
 			position: absolute;
 			top: 10px;
 			left: 520px;
@@ -30,18 +23,15 @@
 			height: 500px;
 		}
 			.create_title{
-				// background-color: blue;
 				width: 100%;
 				font-family: Hiragino Mincho ProN;
 				font-size: 50px;
 			}
 			.create_user{
-				// background-color: blue;
 				text-align: right;
 				width: 100%;
 			}
 			.create_time{
-				// background-color: blue;
 				text-align: right;
 				width: 100%;
 			}
@@ -53,46 +43,38 @@ table{
 	text-align: center;
 }
 .table_all{
-	// background-color: teal;
 	display: block;
 	text-align: center;
 	margin-top: 20px;
 }
 	.table_meishi{
-		// background-color: red;
 		display: inline-block;
 		width: 30%;
 		margin: 0 auto;
 	}
 		#meishi_graph{
-			// background-color: white;
 			margin: 5px 5px;
 			text-align: center;
 		}
 	.table_doushi{
-		// background-color: orange;
 		display: inline-block;
 		width: 30%;
 		margin: 0 auto;
 	}
 		#doushi_graph{
-			// background-color: white;
 			margin: 5px 5px;
 			text-align: center;
 		}
 	.table_hinshi{
-		// background-color: yellow;
 		display: inline-block;
 		width: 30%;
 		margin: 0 auto;
 	}
 		#hinshi_graph{
-			// background-color: white;
 			margin: 5px 5px;
 			text-align: center;
 		}
 .sematic_block{
-	// background-color: blue;
 	width: 100%;
 	height: 300px;
 	font-size: 30px;

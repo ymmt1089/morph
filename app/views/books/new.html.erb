@@ -15,7 +15,7 @@
     <div class="submit_button">
       <%= f.submit '投稿する' , id:'submit', data: {disable_with: '解析中...'} ,:class=>"btn waves-effect"%>
     </div>
-    <!-- 以下ローディング画面用js -->
+    <!-- 以下ローディング画面用js　別のローディング画面が実装マスト -->
     <script>
       $('#submit').on('click',function(){
         document.getElementsByClassName('preloader-wrapper big active')[0].style.display ="block";
@@ -72,7 +72,3 @@
   </div>
 </div>
 <!-- ここまでローディング画面用HTML -->
-
-<!-- 以下ローディング画面用CSS -->
-
-<!-- ここまでローディング画面用CSS -->

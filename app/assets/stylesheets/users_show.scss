@@ -1,19 +1,12 @@
 // users_show
-//text-orverflow: ellipsis;
-//orberflow: hidden;
-//ward-warp: break-word;
-
-
 .profile-main{
 	display: block;
-	// background-color: #ffffe0;
 	width: 90%;
 	height: 220px;
 	margin: 0 auto;
 	position: relative;
 }
 	.profile-left{
-		// background-color: blue;
 		width: 200px;
 		height: 200px;
 		display: inline-block;
@@ -21,7 +14,6 @@
 		position: absolute;
 		left: 0px;
 		top:0px;
-		// float: left;
 		background-size: cover;
 	}
 	.profile-image{
@@ -30,54 +22,40 @@
 		height: 200px;
 	}
 	.profile-center{
-		// background-color: #deb887;
 		width: 712px;
 		height: 200px;
 		display: inline-block;
-		// float: left;
-		// margin: 10px 10px;
 		position: absolute;
 		left: 220px;
 		top: 10px;
 	}
 	.profile-right{
-		// background-color: #d2b48c;
 		width: 200px;
 		height: 200px;
 		display: inline-block;
-		// float: left;
 		position: absolute;
 		right: 10px;
 		top: 10px;
 	}
 .word_cloud{
-	// background-color: white;
 	width: 90%;
-	// height: 1000px;
 	margin: 0 auto 50px auto;
 }
 	.cloud_style_show{
-		// background-color: white;
 		display: inline-block;
 		width: 300px;
 		height: 300px;
 		box-sizing: border-box;
 		border: 1px solid #ccc;
 		margin: 10px;
-		// border-radius: 10px;
-		// position: absolute;
 		z-index: 1;
 	}
 	#one_book {
-		// background-color: #ffffe0;
-		// display: block;
 		border-radius: 10px;
 		margin: 5px;
 		position: relative;
 	}
 	#one_book a{
-		// background-color: #ffffe0;
-		// display: block;
 		border-radius: 10px;
 		margin: 5px;
 		position: absolute;
@@ -87,19 +65,16 @@
 	    width: 100%;
 		}
 	.one_pro{
-		// background-color: white;
 		display: inline-block;
 		height: 100%;
 	}
 	.one_title{
 		display: block;
 		width: 800px;
-		// background-color: orange;
 	}
 	.one_body{
 		display: block;
 		text-overflow: ellipsis;
-		// background: #eee;
   		overflow: hidden;
   		width: 800px;
   		height: 200px;
