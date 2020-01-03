@@ -32,5 +32,5 @@
 /vendor/bundle
 
 # 追記(mecab設定関連のファイル)
-/CRF++-0.58
-/cabocha-0.69
+/CRF++-0.58/
+/cabocha-0.69/
