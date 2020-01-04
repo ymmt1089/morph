@@ -30,10 +30,7 @@
                         <li><a><%= link_to '作品投稿', new_book_path %></a></li>
                         <li><a><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></a></li>
                         <% elsif admin_signed_in? %>
-                        <li><a><%= link_to 'about', about_path %></a></li>
-                        <li><a><%= link_to 'マイページ', user_path(current_user.id) %></a></li>
                         <li><a><%= link_to '作品一覧', books_path %></a></li>
-                        <li><a><%= link_to '作品投稿', new_book_path %></a></li>
                         <li><a><%= link_to 'ユーザー一覧', users_path %></a></li>
                         <li><a><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></a></li>
                         <% else %>
