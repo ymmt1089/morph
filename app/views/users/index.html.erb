@@ -1,12 +1,13 @@
 <div class="admin_index">
 	<h1 class="page_title">ユーザー管理画面</h1>
     <div class="user_list">
-    <% @books.each do |books| %>
-        <%= books.title%>
-        <%= books.user_id%>
-    <%end%>
-    <% @users.each do |users| %>
-        <%= users.user_name %>
-    <%end%>
+        <% @users.each do |users| %>
+            <p>
+            <div class="profile-left" style="background-image: url(<%= image_url('no_image.jpg') %>)"><%= attachment_image_tag users,:user_image, :fill,100,100, :class=>"profile-image" %></div>
+            <%= users.user_name %>
+            <%= users.email %>
+            <%= users.encrypted_password%>
+            </p>
+        <%end%>
     </div>
 </div>
