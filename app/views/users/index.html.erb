@@ -1,0 +1,12 @@
+<div class="admin_index">
+	<h1 class="page_title">ユーザー管理画面</h1>
+    <div class="user_list">
+    <% @books.each do |books| %>
+        <%= books.title%>
+        <%= books.user_id%>
+    <%end%>
+    <% @users.each do |users| %>
+        <%= users.user_name %>
+    <%end%>
+    </div>
+</div>
