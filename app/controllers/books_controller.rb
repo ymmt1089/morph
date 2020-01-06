@@ -148,7 +148,11 @@ class BooksController < ApplicationController
 	def destroy
 		book = Book.with_deleted.find(params[:id])
 		if  book.destroy
-			redirect_to books_path
+			if admin_signed_in?
+				redirect_to admin_path(book.user.id)
+			else
+				redirect_to books_path
+			end
 		else
 			redirect_to edit_book_path
 		end

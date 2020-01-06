@@ -14,10 +14,11 @@ class AdminsController < ApplicationController
     end
 
     def destroy
+        binding.pry
         user = User.with_deleted.find(params[:id])
         book = Book.with_deleted.find(params[:id])
 		if  user.destroy
-			redirect_to admins_path
+			redirect_to back
         elsif book.destroy
 			redirect_to admin_path(book.user.id)
         end
