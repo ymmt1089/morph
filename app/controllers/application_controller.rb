@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
 
 	def after_sign_out_path_for(resource)
     	books_path # ログアウト後に遷移するpathを設定
-  	end
+	end
+
 
 	protected
 		def configure_permitted_parameters
