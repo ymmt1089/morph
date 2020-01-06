@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_12_26_105636) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.float "sentiment"
-    t.index ["body"], name: "index_books_on_body"
+    t.string "colors"
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
     t.index ["title"], name: "index_books_on_title"
     t.index ["user_id"], name: "index_books_on_user_id"
@@ -76,8 +76,6 @@ ActiveRecord::Schema.define(version: 2019_12_26_105636) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
-    t.index ["email"], name: "index_users_on_email"
-    t.index ["user_name"], name: "index_users_on_user_name"
   end
 
 end

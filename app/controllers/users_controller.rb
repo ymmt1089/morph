@@ -2,11 +2,6 @@ class UsersController < ApplicationController
 
 	before_action :authenticate_user!, only:[ :show, :edit, :update]
 
-	def index
-		@books = Book.all
-		@users = User.all
-	end
-
 	def show
 		@user = User.find(params[:id])
 		@books = @user.books.with_deleted
@@ -51,11 +46,20 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		user = User.find(params[:id])
-		if  user.destroy
-			redirect_to books_path
+		user = User.with_deleted.find(params[:id])
+		unless user.deleted_at.present?
+			if  user.destroy
+				if admin_signed_in?
+					redirect_to admins_path
+				else
+					redirect_to books_path
+				end
+			else
+				redirect_to edit_book_path
+			end
 		else
-			redirect_to edit_book_path
+			user.restore
+			redirect_to admins_path
 		end
 	end
 

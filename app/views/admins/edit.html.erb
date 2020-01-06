@@ -1,0 +1,17 @@
+<div class="admin_show">
+	<h1 class="page_title">本文詳細</h1>
+    <div class="profile-main">
+        <div class="profile-left" style="background-image: url(<%= image_url('no_image.jpg') %>)"><%= attachment_image_tag @user,:user_image , :class=>"profile-image" %></div>
+        <div class="profile-center">
+            <h5><%= @book.user.user_name %></h5>
+            <a><%= @book.user.self_introduction %></a>
+        </div>
+        <div class="profile-right">
+            <%= link_to "この文章を削除する" ,book_path(@book.id), method: :delete  ,id:'submit_1' ,:class=>"btn red waves-effect"%></a>
+        </div>
+    </div>
+    <div class="admin_edit_book">
+        <h5><%= @book.title %></h5>
+        <%= @book.body %>
+    </div>
+</div>

@@ -1,3 +1,67 @@
 // Place all the styles related to the Admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.admin_index{
+    width: 80%;
+    margin: auto;
+}
+.user_list{
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+    .user_name_list{
+        width: 40%;
+        display: inline-block;
+        text-align: center;
+        margin: auto;
+        border-bottom: 1px solid;
+    }
+    .user_email_list{
+        width: 40%;
+        display: inline-block;
+        text-align: center;
+        margin: auto;
+        border-bottom: 1px solid;
+    }
+    .user_status{
+        width: 10%;
+        display: inline-block;
+        text-align: center;
+        margin: auto;
+        border-bottom: 1px solid;
+    }
+
+.admin_show{
+    width: 80%;
+    margin: auto;
+}
+.admin_book_list{
+    display: block;
+    margin: auto;
+    overflow: hidden;
+    border-bottom: 1px solid;
+
+}
+    .admin_book_title{
+        display: inline-block;
+        margin: auto;
+        width: 30%;
+    }
+    .admin_book_body{
+        display: inline-block;
+        margin: auto;
+        width: 35%;
+        text-overflow: ellipsis;
+    }
+    .admin_book_sentiment{
+        display: inline-block;
+        margin: auto;
+        width: 10%;
+    }
+    .admin_book_created_at{
+        display: inline-block;
+        margin: auto;
+        width: 20%;
+    }

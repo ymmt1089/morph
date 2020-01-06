@@ -2,13 +2,18 @@ class ApplicationController < ActionController::Base
 
 	before_action :configure_permitted_parameters, if: :devise_controller?
 
-	def after_sign_in_path_for(resource)
-		books_path #サインイン後に遷移するpathを設定
+	def after_sign_in_path_for(resource)#サインイン後に遷移するpathを設定（adminとuserで変更）
+		if  admin_signed_in?
+			admins_path
+		else
+			books_path
+		end
 	end
 
 	def after_sign_out_path_for(resource)
     	books_path # ログアウト後に遷移するpathを設定
-  	end
+	end
+
 
 	protected
 		def configure_permitted_parameters
