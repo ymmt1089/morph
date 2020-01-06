@@ -23,14 +23,14 @@
                 <div class="container">
                     <a><%= link_to 'MôRPH - もおふ。-', about_path ,class: "brand-logo"%></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <% if user_signed_in? %>
+                        <% if admin_signed_in? %>
+                        <li><a><%= link_to 'ユーザー管理画面', admins_path %></a></li>
+                        <li><a><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></a></li>
+                        <% elsif user_signed_in? %>
                         <li><a><%= link_to 'MôRPHとは', about_path %></a></li>
                         <li><a><%= link_to 'マイページ', user_path(current_user.id) %></a></li>
                         <li><a><%= link_to '作品一覧', books_path %></a></li>
                         <li><a><%= link_to '作品投稿', new_book_path %></a></li>
-                        <li><a><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></a></li>
-                        <% elsif admin_signed_in? %>
-                        <li><a><%= link_to 'ユーザー管理画面', admins_path %></a></li>
                         <li><a><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></a></li>
                         <% else %>
                         <li><a><%= link_to 'MôRPHとは', about_path %></a></li>
