@@ -1,5 +1,7 @@
 class AdminsController < ApplicationController
 
+    before_action :authenticate_admin!
+
     def index
         @books = Book.all
         @users = User.with_deleted
