@@ -1,3 +1,25 @@
 // Place all the styles related to the Admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.admin_index{
+    width: 80%;
+    margin: auto;
+}
+.user_list{
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+.user_name_list{
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+}
+.user_email_list{
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+}

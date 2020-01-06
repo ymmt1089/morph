@@ -1,12 +1,19 @@
 <div class="admin_index">
 	<h1 class="page_title">ユーザー管理画面</h1>
     <div class="user_list">
+        <div class="user_name_list">
+            <span>ユーザーネーム</span>
+        </div>
+        <div class="user_email_list">
+            <span>メールアドレス</span>
+        </div>
         <% @users.each do |users| %>
-            <p>
-            <%= users.user_name %>
-            <%= users.email %>
-            <%= link_to users.user_name, user_path(users)%>
-            </p>
+            <div class="user_name_list">
+            <span><%= link_to users.user_name, user_path(users)%></span>
+            </div>
+            <div class="user_email_list">
+            <span></span><%= users.email %></span>
+            </div>
         <%end%>
     </div>
 </div>
