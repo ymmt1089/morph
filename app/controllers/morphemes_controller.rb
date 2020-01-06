@@ -72,8 +72,6 @@ class MorphemesController < ApplicationController
 		table_hinshi_changed_json = table_hinshi.to_json.html_safe
 		@table_hinshi_graph = table_hinshi_changed_json
 
-		binding.pry
-
 	end
 
 	def index

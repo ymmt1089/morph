@@ -126,9 +126,13 @@ class BooksController < ApplicationController
 		}
 		semantic_arr_compact = semantic_arr.compact
 		sum_semantic_compact_sum = semantic_arr_compact.sum
-		semantic_average = sum_semantic_compact_sum / semantic_arr_compact.length
-		@semantic_average_par = (semantic_average*100).round(2)
-		@book.sentiment = @semantic_average_par
+		unless sum_semantic_compact_sum == 0
+			semantic_average = sum_semantic_compact_sum / semantic_arr_compact.length
+			@semantic_average_par = (semantic_average*100).round(2)
+			@book.sentiment = @semantic_average_par
+		else
+			@book.sentiment = nil
+		end
 		@book.save
       else
       	render :new
@@ -148,7 +152,11 @@ class BooksController < ApplicationController
 	def destroy
 		book = Book.with_deleted.find(params[:id])
 		if  book.destroy
-			redirect_to books_path
+			if admin_signed_in?
+				redirect_to admin_path(book.user.id)
+			else
+				redirect_to books_path
+			end
 		else
 			redirect_to edit_book_path
 		end
