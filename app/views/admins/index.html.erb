@@ -7,12 +7,22 @@
         <div class="user_email_list">
             <span><h5>メールアドレス</h5></span>
         </div>
+        <div class="user_status">
+            <span><h5>退会状態</h5></span>
+        </div>
         <% @users.each do |users| %>
             <div class="user_name_list">
                 <span><%= link_to users.user_name, admin_path(users)%></span>
             </div>
             <div class="user_email_list">
-                <span></span><%= users.email %></span>
+                <span><%= users.email %></span>
+            </div>
+            <div class="user_status">
+                <% unless users.deleted_at.present? %>
+                    <span>　　　　</span>
+                <% else %>
+                    <span>退会済み</span>
+                <% end %>
             </div>
         <%end%>
     </div>

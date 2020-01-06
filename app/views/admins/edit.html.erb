@@ -1,5 +1,5 @@
 <div class="admin_show">
-	<h1 class="page_title">ユーザー詳細（本文詳細）</h1>
+	<h1 class="page_title">本文詳細</h1>
     <div class="profile-main">
         <div class="profile-left" style="background-image: url(<%= image_url('no_image.jpg') %>)"><%= attachment_image_tag @user,:user_image , :class=>"profile-image" %></div>
         <div class="profile-center">
@@ -7,7 +7,7 @@
             <a><%= @book.user.self_introduction %></a>
         </div>
         <div class="profile-right">
-            <a><%= link_to "ユーザーを削除" ,user_path(@book.user),method: :delete ,id:'submit' ,:class=>"btn red waves-effect"  %></a>
+            <%= link_to "この文章を削除する" ,book_path(@book.id), method: :delete  ,id:'submit_1' ,:class=>"btn red waves-effect"%></a>
         </div>
     </div>
     <div class="admin_edit_book">
