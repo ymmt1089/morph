@@ -3,10 +3,9 @@
     <div class="user_list">
         <% @users.each do |users| %>
             <p>
-            <div class="profile-left" style="background-image: url(<%= image_url('no_image.jpg') %>)"><%= attachment_image_tag users,:user_image, :fill,100,100, :class=>"profile-image" %></div>
             <%= users.user_name %>
             <%= users.email %>
-            <%= users.encrypted_password%>
+            <%= link_to users.user_name, user_path(users)%>
             </p>
         <%end%>
     </div>
