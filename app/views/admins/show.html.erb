@@ -1,0 +1,30 @@
+<div class="admin_show">
+	<h1 class="page_title">ユーザー詳細</h1>
+    <div class="profile-main">
+        <div class="profile-left" style="background-image: url(<%= image_url('no_image.jpg') %>)"><%= attachment_image_tag @user,:user_image , :class=>"profile-image" %></div>
+        <div class="profile-center">
+            <h5><%= @user.user_name %></h5>
+            <a><%= @user.self_introduction %></a>
+        </div>
+        <div class="profile-right">
+            <a><%= link_to "ユーザーを削除" ,admins_path,method: :delete ,id:'submit' ,:class=>"btn red waves-effect"  %></a>
+        </div>
+    </div>
+        <% @user.books.each do |book| %>
+        <div class="admin_book_list">
+            <div class="admin_book_title">
+                <span><%= link_to book.title, edit_admin_path(@user)%></span>
+            </div>
+            <div class="admin_book_body">
+                <span><%= book.body.truncate(20) %></span>
+            </div>
+            <div class="admin_book_sentiment">
+                <span><%= book.sentiment %></span>
+            </div>
+            <div class="admin_book_created_at">
+                <span><%= book.created_at %></span>
+            </div>
+            <%= link_to "削除する" ,user_path(@user), method: :delete  ,id:'submit_1' ,:class=>"btn red waves-effect"%></a>
+        </div>
+        <% end %>
+</div>
