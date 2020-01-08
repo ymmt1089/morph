@@ -64,6 +64,6 @@ Rails.application.configure do
   host = 'samplehost'
   Rails.application.routes.default_url_options[:host] = host
 
-  config.action_mailer.default_url_options = { host: "samplehost"}
+  config.action_mailer.default_url_options = { host: "http://ec2-18-176-124-216.ap-northeast-1.compute.amazonaws.com/"}
 
 end
