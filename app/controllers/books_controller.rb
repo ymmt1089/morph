@@ -135,17 +135,22 @@ class BooksController < ApplicationController
 		end
 
 		# ここから色彩分析
-		list_color_db = Array.new # 色彩判定データベース格納用配列
-		File.open('color_db.txt', 'r') do |file| # 'color_db.txt'は色彩値データベースを保存したテキストファイル
-			file.each{ |db|
-				hash = Hash.new
-				hash['color_name'.to_sym] = db.chomp.split(':')[0]#色彩の名前
-				hash['color_hex'.to_sym] = db.chomp.split(':')[1]#色彩値
-				list_color_db << hash
-			}
-		end
-		color_arr = Array.new # 色彩値格納用配列
-		color_result = sentimental_result #感情分析に用いたハッシュをそのまま用いる
+		# list_color_db = Array.new # 色彩判定データベース格納用配列
+		# File.open('color_db.txt', 'r') do |file| # 'color_db.txt'は色彩値データベースを保存したテキストファイル
+		# 	file.each{ |db|
+		# 		array = Array.new
+		# 		array_one = Array.new
+		# 		array = db.chomp.split(':')[1]#色彩値
+		# 		array = array.scan(/.{1,#{2}}/)
+		# 		array.first(3).each do |value|
+		# 			array_one << value + ":"
+		# 		end
+		# 		list_color_db << array_one
+		# 	}
+		# end
+		# binding.pry
+		# color_arr = Array.new # 色彩値格納用配列
+		# color_result = sentimental_result #感情分析に用いたハッシュをそのまま用いる
 		# ここまで色彩分析
 
 		@book.save
