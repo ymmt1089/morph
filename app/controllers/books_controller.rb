@@ -66,79 +66,71 @@ class BooksController < ApplicationController
 				mecab_split = mecab_split.gsub(/\r/,'')
 				mecab_arr.push(mecab_split.split("\t"))
 			end
-		end
-		# 以下データ収納時間短縮のためバルクインサート使用
-		mecab_result = []
-		mecab_arr.each { |arr|
-		  next if arr.count == 1 #mecab_arr最終配列のEOSを除外するため
-		  morpheme = Morpheme.new(
-		      surface: arr[0],
-		      reading: arr[1],
-		      origin: arr[2],
-		      pos: arr[3],
-		      book_id: @book.id
-		  )
-		  morpheme.inflection = arr[4] if arr[4].present?
-		  morpheme.conjugation = arr[5] if arr[5].present?
-		  mecab_result << morpheme
-		}
-		mecab_result.each_slice(100).each do |morphemes|
-			Morpheme.import morphemes #originを100個単位でmorphemesデータベースに保存
-		end
-		origins = []
-		morphemes = Morpheme.all
-		morphemes.each do |morpheme|
-			origins.push(morpheme.origin)
-		end
-		  redirect_to book_path(@book.id)
+			# 以下データ収納時間短縮のためバルクインサート使用
+			mecab_result = []
+			mecab_arr.each do |arr|
+				next if arr.count == 1 #mecab_arr最終配列のEOSを除外するため
+				morpheme = Morpheme.new(
+					surface: arr[0],
+					reading: arr[1],
+					origin: arr[2],
+					pos: arr[3],
+					book_id: @book.id
+				)
+				morpheme.inflection = arr[4] if arr[4].present?
+				morpheme.conjugation = arr[5] if arr[5].present?
+				mecab_result << morpheme
+			end
+			mecab_result.each_slice(100).each do |morphemes|
+				Morpheme.import morphemes #originを100個単位でmorphemesデータベースに保存
+			end
+			redirect_to book_path(@book.id)
 
-		# 以下感情分析
-		# 感情分析用配列
-		one_book_morpheme_origins_all = Morpheme.where("(pos not like ? and pos not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ?) and book_id = ?","%記号%","助詞%","する","ある","なる","いう","いる" ,@book.id)
-		one_book_morpheme_origins_count_all = one_book_morpheme_origins_all.group(:origin).count
-		one_book_morpheme_origins_count_sorted_hash_all = Hash[one_book_morpheme_origins_count_all.sort_by{ |key,value| -value }  ]
-		result_all = one_book_morpheme_origins_count_sorted_hash_all.reject{|key,value|(/nil/ =~ key) || (value <= 0)}
-		result_all_map = result_all.map{|v| {text:v[0],size:v[1]}}
-		sentimental_result = result_all_map.compact
+			# 以下感情分析。形態素解析時のコードと類似。
+			one_book_morpheme_origins_all = Morpheme.where("(pos not like ? and pos not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ?) and book_id = ?","%記号%","助詞%","する","ある","なる","いう","いる" ,@book.id)
+			one_book_morpheme_origins_count_all = one_book_morpheme_origins_all.group(:origin).count
+			one_book_morpheme_origins_count_sorted_hash_all = Hash[one_book_morpheme_origins_count_all.sort_by{ |key,value| -value }  ]
+			result_all = one_book_morpheme_origins_count_sorted_hash_all.reject{|key,value|(/nil/ =~ key) || (value <= 0)}
+			result_all_map = result_all.map{|v| {text:v[0],size:v[1]}}
+			sentimental_result = result_all_map.compact
 
-		list_sentimental_db = Array.new # 単語感情極性対応データベース格納用配列
-		File.open('sentimental_db.txt', 'r') do |file| # 'sentimental_db.txt'は単語感情極性対応データベースを保存したテキストファイル
-			file.each{ |db|
-				hash = Hash.new
-				hash['text'.to_sym] = db.chomp.split(':')[0]#単語（origin）
-				hash['semantic_orientations'.to_sym] = db.chomp.split(':')[3]#感情値
-				list_sentimental_db << hash
-			}
-		end
-		semantic_arr = Array.new # 感情値格納用配列
-		sentimental_result.each{ |result|
-			tmp = Array.new
-			result.each{ |h|
-				list_sentimental_db.each{ |db|
-					# 単語、読み、品詞が一致の場合、感情値をカウント
-					if result[:text] == db[:text] then
-						tmp.push (db[:semantic_orientations])
+			list_sentimental_db = Array.new # 単語感情極性対応データベース格納用配列
+			File.open('sentimental_db.txt', 'r') do |file| # 'sentimental_db.txt'は単語感情極性対応データベースを保存したテキストファイル
+				file.each do |db|
+					hash = Hash.new
+					hash['text'.to_sym] = db.chomp.split(':')[0]#単語（origin）
+					hash['semantic_orientations'.to_sym] = db.chomp.split(':')[3]#感情値
+					list_sentimental_db << hash
+				end
+			end
+			semantic_arr = Array.new # 感情値格納用配列
+			sentimental_result.each do |result|
+				tmp = Array.new
+				result.each do |h|
+					list_sentimental_db.each do |db|
+						# 単語が一致の場合、感情値をカウント
+						if result[:text] == db[:text] then
+							tmp.push (db[:semantic_orientations])
+						end
 					end
-				}
-			}
-			# カウントした感情値の平均値
-			semantic_ave = tmp.inject(0){ |sum, i| sum += i.to_f} / tmp.size unless tmp.size == 0
-			semantic_arr.push semantic_ave
-		}
-		semantic_arr_compact = semantic_arr.compact
-		sum_semantic_compact_sum = semantic_arr_compact.sum
-		unless sum_semantic_compact_sum == 0
-			semantic_average = sum_semantic_compact_sum / semantic_arr_compact.length
-			@semantic_average_par = (semantic_average*100).round(2)
-			@book.sentiment = @semantic_average_par
-		else
-			@book.sentiment = nil
-		end
-		@book.save
-      else
-      	render :new
-	  end
-	  binding.pry
+				end
+				# カウントした感情値の平均値
+				semantic_ave = tmp.inject(0){ |sum, i| sum += i.to_f} / tmp.size unless tmp.size == 0
+				semantic_arr.push semantic_ave
+			end
+			semantic_arr_compact = semantic_arr.compact
+			sum_semantic_compact_sum = semantic_arr_compact.sum
+			unless sum_semantic_compact_sum == 0 #感情分析値が0なら以下の計算はしない
+				semantic_average = sum_semantic_compact_sum / semantic_arr_compact.length
+				@semantic_average_par = (semantic_average*100).round(2)
+				@book.sentiment = @semantic_average_par
+			else
+				@book.sentiment = nil
+			end
+			@book.save
+      	else
+      		render :new
+	  	end
 	end
 
 	def update
