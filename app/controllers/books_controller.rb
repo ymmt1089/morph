@@ -19,13 +19,13 @@ class BooksController < ApplicationController
 		@words_hash = {}
 		@books.each do |book|
 			one_book_morpheme_origins = Morpheme.where("(pos like ? or pos like ? or pos like ? or pos like ? or pos like ? or pos like ? ) and origin not like ? and origin not like ? and origin not like ? and origin not like ? and origin not like ? and book_id = ? ","名詞-一般","%名詞-固有名詞%","名詞-副詞可能","名詞-接尾-人名","名詞-接尾-地域","動詞-自立","する","ある","なる","いう","いる", book.id)
-			one_book_morpheme_origins_count = one_book_morpheme_origins.group(:origin).count
+			one_book_morpheme_origins_count = one_book_morpheme_origins.group(:origin).count #originの一意のものをカウントしハッシュ化
 			one_book_morpheme_origins_count_sorted_hash = Hash[one_book_morpheme_origins_count.sort_by{ |key,value| -value }  ] #hash化及び、valueの昇順(DESC)でソートする
-			result = one_book_morpheme_origins_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value <= (Math.sqrt(one_book_morpheme_origins_count_sorted_hash.first[1])/2))}
-			changed_result = result.map{|v| {text:v[0],size:v[1]}}
-			words = changed_result.to_json.html_safe
+			result = one_book_morpheme_origins_count_sorted_hash.reject{|key,value|(/nil/ =~ key) || (value <= (Math.sqrt(one_book_morpheme_origins_count_sorted_hash.first[1])/2))} #nilの削除、及びvalueの間引き。（表示する形態素数を頻出度の最大値によって制限）
+			changed_result = result.map{|v| {text:v[0],size:v[1]}} #d3.jsのワードクラウドに渡せる形に変換
+			words = changed_result.to_json.html_safe #json型に変換。
 			@words_array << words
-			@words_hash[book.id] = words
+			@words_hash[book.id] = words #各words_arrayにbook.idを持たせる
 		end
 	end
 
@@ -54,22 +54,23 @@ class BooksController < ApplicationController
       		flash[:notice] = "形態素解析が完了しました。"
 			require 'mecab'
 			wakati = MeCab::Tagger.new ("-Owakati")
-			book_wakati = wakati.parse (@book.body)
-				book_wakati_gsub = book_wakati.gsub(/\r/,'')
-				book_wakati_result = book_wakati_gsub.gsub(/\n/,'')
+			book_wakati = wakati.parse (@book.body)#文章を分かち書きに変換
+				book_wakati_gsub = book_wakati.gsub(/\r/,'')#\rを削除
+				book_wakati_result = book_wakati_gsub.gsub(/\n/,'')#改行の\nを削除
 			chasen = MeCab::Tagger.new ("-Ochasen")
-			book_chasen = chasen.parse(book_wakati)
+			book_chasen = chasen.parse(book_wakati)#分かち書きにしたものをchasen化
 			mecab = book_chasen
-			mecab_split = mecab.split("\n")
+			mecab_split = mecab.split("\n")#\nで区切った配列に変換
 			mecab_arr = []
 			mecab_split.each do |mecab_split|
 				mecab_split = mecab_split.gsub(/\r/,'')
 				mecab_arr.push(mecab_split.split("\t"))
+			end
 		end
 		# 以下データ収納時間短縮のためバルクインサート使用
 		mecab_result = []
 		mecab_arr.each { |arr|
-		  next if arr.count == 1
+		  next if arr.count == 1 #mecab_arr最終配列のEOSを除外するため
 		  morpheme = Morpheme.new(
 		      surface: arr[0],
 		      reading: arr[1],
@@ -82,7 +83,7 @@ class BooksController < ApplicationController
 		  mecab_result << morpheme
 		}
 		mecab_result.each_slice(100).each do |morphemes|
-			Morpheme.import morphemes
+			Morpheme.import morphemes #originを100個単位でmorphemesデータベースに保存
 		end
 		origins = []
 		morphemes = Morpheme.all
@@ -136,7 +137,8 @@ class BooksController < ApplicationController
 		@book.save
       else
       	render :new
-      end
+	  end
+	  binding.pry
 	end
 
 	def update
