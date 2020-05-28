@@ -87,7 +87,7 @@ gem 'materialize-sass', '~> 1.0.0'
 gem 'material_icons'
 gem 'paranoia'
 gem 'json'
-gem 'kaminari','~> 1.1.1'
+gem 'kaminari','~> 1.2.1'
 group :production do
   gem 'mysql2'
 end
